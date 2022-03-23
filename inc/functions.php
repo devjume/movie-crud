@@ -5,8 +5,7 @@ function openDB() {
   $host = $init["host"];
   $db = $init["db"];
   $user = $init["username"];
-  $password = $init["pw"];
-
+  $password = $init["password"];
   $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
   
   return new PDO($dsn, $user, $password, [
@@ -16,7 +15,8 @@ function openDB() {
 }
 
 function returnError(PDOException $pdoex) {
-  header('HTTP/1.1 500 Internal Server Error');
+  http_response_code(500);
   $error = ['error' => $pdoex->getMessage()];
   print json_encode($error);
+  exit();
 }
