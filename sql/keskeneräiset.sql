@@ -49,3 +49,110 @@ INSERT INTO `nayttelijat` (`nayttelija_id`, `elokuva_id`, `rooli`) VALUES
 (20, 3, 'Butch Coolidge');
 
 INSERT INTO `ohjaaja` (`ohjaaja_id`, `ohjaaja_enimi`, `ohjaaja_snimi`) VALUES
+
+-- kaks muuta elokuvaa 
+
+INSERT INTO
+  `arvostelut` (
+    `elokuva_id`,
+    `arvostelija`,
+    `tahdet`,
+    `kommentti`
+  )
+VALUES
+  (2, 'Roni', 5, 'Hemmetin hyvä elokuva, suosittelen!!');
+INSERT INTO
+  `elokuvat` (
+    `elokuva_id`,
+    `elokuva_nimi`,
+    `elokuva_tulovuosi`,
+    `elokuva_kesto`,
+    `elokuva_kieli`,
+    `ohjaaja_id`,
+    `ikaraja`
+  )VALUES
+  (2, '
+Spider-Man: Into the Spider-Verse', 2018, 117, 'Englanti', 2, 7);
+INSERT INTO
+  `elokuva_genret` (`elokuva_id`, `gen_id`)
+VALUES
+  (2, 2);
+INSERT INTO
+  `genret` (`gen_id`, `gen_nimi`)
+VALUES
+  (2, 'animaatio');
+INSERT INTO
+  `nayttelija` (
+    `nayttelija_id`,
+    `nayttelija_enimi`,
+    `nayttelija_snimi`,
+    `nayttelija_sex`
+  )
+VALUES
+  (5, 'Shameik', 'Moore', 'M'),
+  (6, 'Jake', 'Johnson', 'M'),
+  (7, 'Nicolas', 'Cage', 'M'),
+  (8, 'Mahershala', 'Ali', 'M');
+INSERT INTO
+  `nayttelijat` (`nayttelija_id`, `elokuva_id`, `rooli`)
+VALUES
+  (5, 2, 'Miles Morales'),
+  (6, 2, 'Peter B. Parker'),
+  (7, 2, 'Spider-Man Noir'),
+  (8, 2, 'Uncle Aaron');
+INSERT INTO
+  `ohjaaja` (`ohjaaja_id`, `ohjaaja_enimi`, `ohjaaja_snimi`)
+VALUES
+  (2, 'Bob', 'Persichetti');
+--
+INSERT INTO
+  `arvostelut` (
+    `elokuva_id`,
+    `arvostelija`,
+    `tahdet`,
+    `kommentti`
+  )
+VALUES
+  (4, 'Roni', 4, 'Ei mitään hajuu en oo kattonu, mutt näyttää iha ok.');
+INSERT INTO
+  `elokuvat` (
+    `elokuva_id`,
+    `elokuva_nimi`,
+    `elokuva_tulovuosi`,
+    `elokuva_kesto`,
+    `elokuva_kieli`,
+    `ohjaaja_id`,
+    `ikaraja`
+  )VALUES
+  (4, 'Kick-Ass', 2010, 117, 'Englanti', 4, 16);
+INSERT INTO
+  `elokuva_genret` (`elokuva_id`, `gen_id`)
+VALUES
+  (4, 4);
+INSERT INTO
+  `genret` (`gen_id`, `gen_nimi`)
+VALUES
+  (4, 'Toiminta');
+INSERT INTO
+  `nayttelija` (
+    `nayttelija_id`,
+    `nayttelija_enimi`,
+    `nayttelija_snimi`,
+    `nayttelija_sex`
+  )
+VALUES
+  (13, 'Aaron', 'Taylor-Johnson', 'M'),
+  (14, 'Evan', 'Peters', 'M'),
+  (7, 'Nicolas', 'Cage', 'M'),
+  (15, 'Deborah', 'Twiss', 'N');
+INSERT INTO
+  `nayttelijat` (`nayttelija_id`, `elokuva_id`, `rooli`)
+VALUES
+  (13, 2, 'Kick-Ass'),
+  (14, 2, 'Todd'),
+  (7, 2, 'Big Daddy'),
+  (15, 2, 'Mrs. Zane');
+INSERT INTO
+  `ohjaaja` (`ohjaaja_id`, `ohjaaja_enimi`, `ohjaaja_snimi`)
+VALUES
+  (4, 'Matthew', 'Matthew Vaughn	');
