@@ -10,11 +10,10 @@ try {
     $pdoStatement = $pdo->prepare($sql);
     $pdoStatement->bindParam(1,  $id);
     $pdoStatement->execute();
-    $result = $pdoStatement;
     $rowCount = $pdoStatement->rowCount();
     
     if ( $rowCount > 0 ) {
-        while($row = $result->fetch()) {
+        while($row = $pdoStatement->fetch()) {
           echo "id: " . $row["id"]. " Name: " . $row["nimi"]. " Elokuvan tulovuosi: " 
           . $row["vuosi"]. " Elokuvan kesto: ". $row['kesto']. " Elokuvan kieli: ". $row['kieli'] . " Elokuvan ikäraja: ". $row['ikaraja'];
         }
