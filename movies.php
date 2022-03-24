@@ -11,7 +11,7 @@ require_once "./inc/headers.php";
   echo "<tr>
         <th>Nimi</th>
         <th>Tulovuosi</th>
-        <th>Kesto</th>
+        <th>Kesto(min)</th>
         <th>Kieli</th>
         <th>Ikäraja</th>
         </tr>";
