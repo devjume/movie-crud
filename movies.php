@@ -11,7 +11,7 @@ try {
 function createTableRow() {
   //kanta yhteys
   $pdo = openDB();
-  $sql = "SELECT nimi, vuosi, kesto, kieli, ikaraja FROM elokuva";
+  $sql = "SELECT id,nimi, vuosi, kesto, kieli, ikaraja FROM elokuva";
   $elokuvat = $pdo->query($sql);
   if ($elokuvat->rowCount() > 0 ) {
     //jos elokuvia(rivejä) löytyy, niin luodaan taulukko. Vähän taululle tyyliä, sekä taulukon headerit
@@ -30,9 +30,10 @@ function createTableRow() {
           </tr>";
     //jokaista tietokannan riviä kohden luodaan html-taulukkoon uusi rivi
     while($row = $elokuvat->fetch()) {
-        echo '<tr>' . '<td>' . $row["nimi"] . '</td>' . '<td>' . $row["vuosi"] . '</td>' . '<td>' . $row["kesto"] . '</td>' . '<td>' . $row["kieli"] . '</td>' . '<td>' . $row["ikaraja"] . '</td>' . "</tr>";
+        echo '<tr>' . '<td>' . '<a href="single.php?id='.$row["id"].'">'. $row["nimi"] . '</a>' . '</td>' . '<td>' . $row["vuosi"] . '</td>' . '<td>' . $row["kesto"] . '</td>' . '<td>' . $row["kieli"] . '</td>' . '<td>' . $row["ikaraja"] . '</td>' . "</tr>";
     }
     //lopuksi taulukko kiinni 
     echo "</table>";
 }
 }
+
