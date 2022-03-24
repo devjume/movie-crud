@@ -10,12 +10,20 @@ try {
     $pdoStatement = $pdo->prepare($sql);
     $pdoStatement->bindParam(1,  $id);
     $pdoStatement->execute();
-    $results = $pdoStatement->fetch();
+    $result = $pdoStatement;
+    $rowCount = $pdoStatement->rowCount();
     
-    foreach($results as $result){
-        echo $result;
-    }
+    if ( $rowCount > 0 ) {
+        while($row = $result->fetch()) {
+          echo "id: " . $row["id"]. " Name: " . $row["nimi"]. " Elokuvan tulovuosi: " 
+          . $row["vuosi"]. " Elokuvan kesto: ". $row['kesto']. " Elokuvan kieli: ". $row['kieli'] . " Elokuvan ikäraja: ". $row['ikaraja'];
+        }
+      } else {
+        echo "häähää";
+        exit;
+      }
 } catch (PDOException $e) {
     returnError($e);
   }
     
+
