@@ -2,32 +2,37 @@
 require_once "./inc/functions.php";
 require_once "./inc/headers.php";
 
-  echo "<table>";
-  echo "<style>
-  table, th, td {
-    border:1px solid black;
-  }
-  </style>";
-  echo "<tr>
-        <th>Nimi</th>
-        <th>Tulovuosi</th>
-        <th>Kesto(min)</th>
-        <th>Kieli</th>
-        <th>Ikäraja</th>
-        </tr>";
+try {
   createTableRow();
-  echo "</table>";
-
+} catch (PDOException $e) {
+  returnError($e);
+}
 
 function createTableRow() {
+  //kanta yhteys
   $pdo = openDB();
   $sql = "SELECT nimi, vuosi, kesto, kieli, ikaraja FROM elokuva";
   $elokuvat = $pdo->query($sql);
   if ($elokuvat->rowCount() > 0 ) {
-      echo '<tr>';
-      while($row = $elokuvat->fetch()) {
-          echo '<td>' . $row["nimi"] . '</td>' . '<td>' . $row["vuosi"] . '</td>' . '<td>' . $row["kesto"] . '</td>' . '<td>' . $row["kieli"] . '</td>' . '<td>' . $row["ikaraja"] . '</td>' ;
-      }
-      echo "</tr>";
-  }
+    //jos elokuvia(rivejä) löytyy, niin luodaan taulukko. Vähän taululle tyyliä, sekä taulukon headerit
+    echo "<table>";
+    echo "<style>
+            table, td, th {
+            border:1px solid black;
+            }
+          </style>";
+    echo "<tr>
+          <th>Nimi</th>
+          <th>Tulovuosi</th>
+          <th>Kesto(min)</th>
+          <th>Kieli</th>
+          <th>Ikäraja</th>
+          </tr>";
+    //jokaista tietokannan riviä kohden luodaan html-taulukkoon uusi rivi
+    while($row = $elokuvat->fetch()) {
+        echo '<tr>' . '<td>' . $row["nimi"] . '</td>' . '<td>' . $row["vuosi"] . '</td>' . '<td>' . $row["kesto"] . '</td>' . '<td>' . $row["kieli"] . '</td>' . '<td>' . $row["ikaraja"] . '</td>' . "</tr>";
+    }
+    //lopuksi taulukko kiinni 
+    echo "</table>";
+}
 }
