@@ -1,0 +1,12 @@
+
+/* Piilottaa nuolet numero kentästä */
+#kesto-input::-webkit-outer-spin-button,
+#kesto-input::-webkit-inner-spin-button
+{
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#kesto-input[type=number]{
+  -moz-appearance: textfield;
+}
