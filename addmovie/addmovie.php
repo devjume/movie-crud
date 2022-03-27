@@ -33,7 +33,7 @@ require_once "../head.php";
     <div class="col-2">
       <label for="ikaraja-input" class="form-label">Ikäraja:</label>
       <select name="ikaraja" id="ikaraja-input" class="form-control">
-        <option selected value="null">Ei luokiteltu</option>
+        <option selected value="">Ei luokiteltu</option>
         <option value="0">S</option>
         <option value="7">K7</option>
         <option value="16">K16</option>
@@ -90,25 +90,25 @@ require_once "../head.php";
       <div class="nayttelija-rivi row mt-2">
         <div class="col-2">
           <div class="form-floating">
-            <input list="nayttelijat" name="nayttelijat[][nimi]" id="nayttelija-input-10" class="form-control" placeholder="Nimi">
-            <label for="nayttelija-input-10">Nimi</label>
+            <input list="nayttelijat" name="nayttelijat[1][nimi]" id="nayttelija-input-1" class="form-control" placeholder="Nimi">
+            <label for="nayttelija-input-1">Nimi</label>
           </div>
         </div>
         <div class="col-2">
           <div class="form-floating">
-            <input type="text" name="nayttelijat[][rooli]" id="rooli-input-10" class="form-control" placeholder="Rooli">
-            <label for="rooli-input-10">Rooli</label>
+            <input type="text" name="nayttelijat[1][rooli]" id="rooli-input-1" class="form-control" placeholder="Rooli">
+            <label for="rooli-input-1">Rooli</label>
           </div>
         </div>
         <div class="col-2">
           <div class="form-floating">
-            <select name="nayttelijat[][sukupuoli]" id="sukupuoli-input-10" class="form-select">
+            <select name="nayttelijat[1][sukupuoli]" id="sukupuoli-input-1" class="form-select">
               <option value="null"></option>
               <option value="mies">Mies</option>
               <option value="nainen">Nainen</option>
               <option value="muu">Muu</option>
             </select>
-            <label for="sukupuoli-input-10">Sukupuoli</label>
+            <label for="sukupuoli-input-1">Sukupuoli</label>
           </div>
         </div>
         <!-- Datalista näyttelijöistä on erikseen, jotta se ei monistu turhaan kun lisätään useampi näyttelijä -->
@@ -152,11 +152,11 @@ require_once "../head.php";
 
 <script>
   window.onload = () => {
-    // Reset form on page load
+    // Resetoi lomake, kun sivu latautuu
     document.getElementById("elokuva-form").reset();
   }
 
-  // Create new row with input elements to add another actor
+  // Luo uusi lomake rivi jokaiselle näyttelijälle
   document.getElementById("lisaa-nayttelija").addEventListener("click", () => {
     const parentDiv = document.getElementById("nayttelija-lisaus");
     const latestRow = parentDiv.children[parentDiv.childElementCount - 2];
@@ -164,16 +164,22 @@ require_once "../head.php";
     const btn = parentDiv.children[parentDiv.childElementCount - 1];
     parentDiv.insertBefore(clone, btn);
 
-    // Adds one number to ids and htmlfor attributes 
+    // Lisää yksi numero edellisen näyttelijän id, htmlfor ja name attribuutteihin
     for (let i = 0; i < 3; i++) {
-      const element = clone;
-      element.children[i].firstElementChild.firstElementChild.value = null;
+      clone.children[i].firstElementChild.firstElementChild.value = null;
 
-      const currentId = clone.children[i].firstElementChild.firstElementChild.id;
-      const newIdInt = parseInt(currentId.slice(-2)) + 1;
-      const newId = clone.children[i].firstElementChild.firstElementChild.id.slice(0, -2) + newIdInt;
-      clone.children[i].firstElementChild.lastElementChild.htmlFor = newId;
-      clone.children[i].firstElementChild.firstElementChild.id = newId;
+      // Name attribuutti
+      const nameAttribute = clone.children[i].firstElementChild.firstElementChild.name;
+      const nameInt = parseInt(nameAttribute.match(/\d+/g));
+      clone.children[i].firstElementChild.firstElementChild.name = nameAttribute.replace(nameInt, nameInt + 1)
+
+      // Id ja htmlfor attribuutti
+      const idAttribute = clone.children[i].firstElementChild.firstElementChild.id;
+      const idInt = parseInt(idAttribute.match(/\d+/g));
+      clone.children[i].firstElementChild.firstElementChild.id = idAttribute.replace(idInt, idInt + 1);
+      clone.children[i].firstElementChild.lastElementChild.htmlFor = idAttribute.replace(idInt, idInt + 1);
+      console.log(clone.children[i].firstElementChild.firstElementChild.id);
+      console.log(clone.children[i].firstElementChild.lastElementChild.htmlFor);
     }
 
   });
