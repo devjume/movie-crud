@@ -49,7 +49,7 @@ require_once "../head.php";
         try {
           $db = openDB();
 
-          $sql = "SELECT `id`, CONCAT(`etunimi`, ' ', `sukunimi`) AS nimi FROM `ohjaaja`;";
+          $sql = "SELECT `id`, `nimi` FROM `ohjaaja`;";
           $query = $db->query($sql);
           $result = $query->fetchAll();
 
@@ -84,7 +84,7 @@ require_once "../head.php";
         ?>
       </datalist>
     </div>
-
+        
     <h5>Lisää näyttelijöitä</h5>
     <div class="col-12 row" id="nayttelija-lisaus">
       <div class="nayttelija-rivi row mt-2">
@@ -146,10 +146,6 @@ require_once "../head.php";
 
 </div>
 
-</form>
-
-</div>
-
 <script>
   window.onload = () => {
     // Resetoi lomake, kun sivu latautuu
@@ -188,29 +184,4 @@ require_once "../head.php";
 
 <?php
 require_once "../foot.php";
-?>
-<?php
-# ELOKUVA
-#nimi
-#vuosi
-#kesto (min)
-#kieli
-#ikäraja
-#ohjaaja id
-#genre id
-
-# OHJAAJA
-#etunimi
-#sukunimi
-
-# NÄYTTELIJÄ
-#etunimi
-#sukunimi
-#sukupuoli
-
-# NÄYTTELIJÄ - ROOLI
-# näyttelijä id 
-# elokuva id
-# rooli
-
 ?>
