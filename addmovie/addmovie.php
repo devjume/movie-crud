@@ -6,7 +6,7 @@ require_once "../head.php";
 
   <h3>Lisää elokuva</h3>
 
-  <form action="backend.php" method="POST" id="add-movie" class="row g-3">
+  <form action="backend.php" method="POST" id="elokuva-form" class="row g-3">
     <div class="col-2">
       <label for="nimi-input" class="form-label">Elokuva:</label>
       <input type="text" name="nimi" id="nimi-input" class="form-control" placeholder="Elokuvan nimi">
@@ -153,7 +153,7 @@ require_once "../head.php";
 <script>
   window.onload = () => {
     // Reset form on page load
-    document.getElementById("add-movie").reset();
+    document.getElementById("elokuva-form").reset();
   }
 
   // Create new row with input elements to add another actor
