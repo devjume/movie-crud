@@ -43,8 +43,9 @@ CREATE TABLE nayttelija (
   id int AUTO_INCREMENT,
   etunimi varchar(255) not null,
   sukunimi varchar(255) not null,
-  sukupuoli varchar(10),
-  PRIMARY KEY (id)
+  sukupuoli varchar(6),
+  PRIMARY KEY (id),
+  CONSTRAINT chk_sukupuoli CHECK ((sukupuoli in ('Mies', 'Nainen', 'Muu')) OR sukupuoli IS NULL)
 );
 
 CREATE TABLE nayttelija_rooli (
@@ -61,8 +62,8 @@ INSERT INTO ohjaaja(nimi) VALUES ('Andy Muschietti');
 INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id)
   VALUES('IT', 2017, 135, 'Englanti', 1, 16, 1);
 
-INSERT INTO nayttelija (etunimi, sukunimi) 
-  VALUES ('Bill', 'Skarsgard'), ('Jaeden', 'Martell'), ('Sophia', 'Lillis'), ('Finn', 'Wolfhard');
+INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) 
+  VALUES ('Bill', 'Skarsgard', 'Mies'), ('Jaeden', 'Martell', 'Mies'), ('Sophia', 'Lillis', 'Nainen'), ('Finn', 'Wolfhard', 'Mies');
 
 INSERT INTO nayttelija_rooli (nayttelija_id, elokuva_id, rooli)
   VALUES (1, 1, 'Pennywise'), (2, 1, 'Bill Denbrough'), (3, 1, 'Beverly Marsh'), (4, 1, 'Richie Tozier');
