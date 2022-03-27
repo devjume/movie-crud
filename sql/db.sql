@@ -6,8 +6,7 @@ USE moviedb;
 
 CREATE TABLE ohjaaja (
   id int AUTO_INCREMENT,
-  etunimi varchar(255),
-  sukunimi varchar(255),
+  nimi varchar(255) NOT NULL,
   primary key (id)
 );
 
@@ -28,7 +27,8 @@ CREATE TABLE elokuva (
   genre_id int NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (ohjaaja_id) REFERENCES ohjaaja(id),
-  FOREIGN KEY (genre_id) REFERENCES genre(id)
+  FOREIGN KEY (genre_id) REFERENCES genre(id),
+  CONSTRAINT chk_ikaraja CHECK (ikaraja IS NULL OR ikaraja = 0 OR ikaraja = 7 OR ikaraja = 16 or ikaraja = 18)
 );
 
 CREATE TABLE arvostelu (
@@ -56,7 +56,7 @@ CREATE TABLE nayttelija_rooli (
 
 INSERT INTO genre(nimi) VALUES ('Kauhu');
 
-INSERT INTO ohjaaja(etunimi, sukunimi) VALUES ('Andy', 'Muschietti');
+INSERT INTO ohjaaja(nimi) VALUES ('Andy Muschietti');
 
 INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id)
   VALUES('IT', 2017, 135, 'Englanti', 1, 16, 1);
