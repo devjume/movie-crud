@@ -90,7 +90,7 @@ require_once "../head.php";
       <div class="nayttelija-rivi row">
         <div class="col-2">
           <div class="form-floating">
-            <input list="nayttelijat" name="nayttelijat[][nimi]" id="nayttelija-input" class="form-control" placeholder="Nimi">
+            <input list="nayttelijat" name="nayttelijat[][nimi]" id="nayttelija-input-10" class="form-control" placeholder="Nimi">
             <datalist id="nayttelijat">
               <?php
               require_once "../inc/functions.php";
@@ -109,25 +109,25 @@ require_once "../head.php";
               }
               ?>
             </datalist>
-            <label for="nayttelija-input">Nimi</label>
+            <label for="nayttelija-input-10">Nimi</label>
           </div>
 
         </div>
         <div class="col-2">
           <div class="form-floating">
-            <input type="text" name="nayttelijat[][rooli]" id="rooli-input" class="form-control" placeholder="Rooli">
-            <label for="rooli-input">Rooli</label>
+            <input type="text" name="nayttelijat[][rooli]" id="rooli-input-10" class="form-control" placeholder="Rooli">
+            <label for="rooli-input-10">Rooli</label>
           </div>
         </div>
         <div class="col-2">
           <div class="form-floating">
-            <select name="nayttelijat[][sukupuoli]" id="sukupuoli-input" class="form-select">
+            <select name="nayttelijat[][sukupuoli]" id="sukupuoli-input-10" class="form-select">
               <option value="null"></option>
               <option value="mies">Mies</option>
               <option value="nainen">Nainen</option>
               <option value="muu">Muu</option>
             </select>
-            <label for="sukupuoli-input">Sukupuoli</label>
+            <label for="sukupuoli-input-10">Sukupuoli</label>
           </div>
 
         </div>
@@ -153,14 +153,24 @@ require_once "../head.php";
 
 <script>
   document.getElementById("lisaa-nayttelija").addEventListener("click", () => {
-    const node = document.getElementsByClassName("nayttelija-rivi")[0];
+    const node = document.getElementsByClassName("nayttelija-rivi");
+    console.log(node);
     const clone = node.cloneNode(true);
     const btn = node.parentElement.lastElementChild;
     node.parentElement.insertBefore(clone, btn);
     for (let i = 0; i < 3; i++) {
-      const label = clone.children[i].firstElementChild.lastElementChild.htmlFor += "23";
-      console.log(label);
-      console.log(clone.children[i].firstElementChild.lastElementChild.htmlFor.slice(0,-1));
+      let currentId = clone.children[i].firstElementChild.firstElementChild.id;
+      const newIdInt = parseInt(currentId.slice(-2)) + 1;
+      const newId = clone.children[i].firstElementChild.firstElementChild.id.slice(0, -2) + newIdInt;
+      clone.children[i].firstElementChild.firstElementChild.id = newId;
+
+      clone.children[i].firstElementChild.lastElementChild.htmlFor = newId;
+      //let kissa = (currentId.slice(-2));
+      //console.log(currentId);
+      //l//et kala = currentId.slice(-2) + newId;
+      //c//onst newLabel = ;
+      //console.log(kala);
+      //console.log(clone.children[i].firstElementChild.lastElementChild.htmlFor.slice(0, -1));
     }
 
   });
