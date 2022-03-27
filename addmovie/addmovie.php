@@ -6,7 +6,7 @@ require_once "../head.php";
 
   <h3>Lisää elokuva</h3>
 
-  <form action="backend.php" method="POST" class="row g-3">
+  <form action="backend.php" method="POST" id="add-movie" class="row g-3">
     <div class="col-2">
       <label for="nimi-input" class="form-label">Elokuva:</label>
       <input type="text" name="nimi" id="nimi-input" class="form-control" placeholder="Elokuvan nimi">
@@ -86,32 +86,13 @@ require_once "../head.php";
     </div>
 
     <h5>Lisää näyttelijöitä</h5>
-    <div class="col-12 row">
-      <div class="nayttelija-rivi row">
+    <div class="col-12 row" id="nayttelija-lisaus">
+      <div class="nayttelija-rivi row mt-2">
         <div class="col-2">
           <div class="form-floating">
             <input list="nayttelijat" name="nayttelijat[][nimi]" id="nayttelija-input-10" class="form-control" placeholder="Nimi">
-            <datalist id="nayttelijat">
-              <?php
-              require_once "../inc/functions.php";
-              try {
-                $db = openDB();
-
-                $sql = "SELECT `id`, CONCAT(`etunimi`, ' ', `sukunimi`) AS nimi FROM `nayttelija`;";
-                $query = $db->query($sql);
-                $result = $query->fetchAll();
-
-                foreach ($result as $row) {
-                  echo "<option value=\"{$row['nimi']}\"}>";
-                }
-              } catch (PDOException $e) {
-                returnError($e);
-              }
-              ?>
-            </datalist>
             <label for="nayttelija-input-10">Nimi</label>
           </div>
-
         </div>
         <div class="col-2">
           <div class="form-floating">
@@ -129,8 +110,26 @@ require_once "../head.php";
             </select>
             <label for="sukupuoli-input-10">Sukupuoli</label>
           </div>
-
         </div>
+        <!-- Datalista näyttelijöistä on erikseen, jotta se ei monistu turhaan kun lisätään useampi näyttelijä -->
+        <datalist id="nayttelijat">
+          <?php
+          require_once "../inc/functions.php";
+          try {
+            $db = openDB();
+
+            $sql = "SELECT `id`, CONCAT(`etunimi`, ' ', `sukunimi`) AS nimi FROM `nayttelija`;";
+            $query = $db->query($sql);
+            $result = $query->fetchAll();
+
+            foreach ($result as $row) {
+              echo "<option value=\"{$row['nimi']}\"}>";
+            }
+          } catch (PDOException $e) {
+            returnError($e);
+          }
+          ?>
+        </datalist>
       </div>
 
 
@@ -152,25 +151,29 @@ require_once "../head.php";
 </div>
 
 <script>
+  window.onload = () => {
+    // Reset form on page load
+    document.getElementById("add-movie").reset();
+  }
+
+  // Create new row with input elements to add another actor
   document.getElementById("lisaa-nayttelija").addEventListener("click", () => {
-    const node = document.getElementsByClassName("nayttelija-rivi");
-    console.log(node);
-    const clone = node.cloneNode(true);
-    const btn = node.parentElement.lastElementChild;
-    node.parentElement.insertBefore(clone, btn);
+    const parentDiv = document.getElementById("nayttelija-lisaus");
+    const latestRow = parentDiv.children[parentDiv.childElementCount - 2];
+    const clone = latestRow.cloneNode(true);
+    const btn = parentDiv.children[parentDiv.childElementCount - 1];
+    parentDiv.insertBefore(clone, btn);
+
+    // Adds one number to ids and htmlfor attributes 
     for (let i = 0; i < 3; i++) {
-      let currentId = clone.children[i].firstElementChild.firstElementChild.id;
+      const element = clone;
+      element.children[i].firstElementChild.firstElementChild.value = null;
+
+      const currentId = clone.children[i].firstElementChild.firstElementChild.id;
       const newIdInt = parseInt(currentId.slice(-2)) + 1;
       const newId = clone.children[i].firstElementChild.firstElementChild.id.slice(0, -2) + newIdInt;
-      clone.children[i].firstElementChild.firstElementChild.id = newId;
-
       clone.children[i].firstElementChild.lastElementChild.htmlFor = newId;
-      //let kissa = (currentId.slice(-2));
-      //console.log(currentId);
-      //l//et kala = currentId.slice(-2) + newId;
-      //c//onst newLabel = ;
-      //console.log(kala);
-      //console.log(clone.children[i].firstElementChild.lastElementChild.htmlFor.slice(0, -1));
+      clone.children[i].firstElementChild.firstElementChild.id = newId;
     }
 
   });
