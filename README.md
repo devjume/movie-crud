@@ -13,3 +13,5 @@ DELETE: Mahdollisuus poistaa arvostelu?
 - [ ] Jokaisella elokuva sivulla voi lisätä arvostelun.
 - [ ] Sivu jolla voi lisätä uuden elokuvan kaikkineen tietoineen.
   - [ ] Myös näyttelijät, ohjaaja yms. (ei arvostelua)
+- [ ] Projektin rakenne muuttaa Meijan tunnilla käydyllä tavalla
+- [ ] Muuta git repon nimeä
