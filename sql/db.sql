@@ -56,18 +56,41 @@ CREATE TABLE nayttelija_rooli (
   FOREIGN KEY (nayttelija_id) REFERENCES nayttelija(id)
 );
 
-INSERT INTO genre(nimi) VALUES ('Kauhu');
+INSERT INTO genre(nimi) VALUES ('Kauhu'), ('Draama/Rikos'), ('Toiminta');
 
-INSERT INTO ohjaaja(nimi) VALUES ('Andy Muschietti');
+INSERT INTO ohjaaja(nimi) VALUES 
+  ('Andy Muschietti'),
+  ('Quentin Tarantino');
 
 INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id, posterilinkki)
-  VALUES('IT', 2017, 135, 'Englanti', 1, 16, 1, "https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzODM3Mzg@._V1_.jpg");
+  VALUES('IT', 2017, 135, 'Englanti', 1, 16, 1, 'https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzODM3Mzg@._V1_.jpg'),
+    ('Pulp Ficton', 1993, 154, 'Englanti', 2, 16, 2, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg');
 
 INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) 
-  VALUES ('Bill', 'Skarsgard', 'Mies'), ('Jaeden', 'Martell', 'Mies'), ('Sophia', 'Lillis', 'Nainen'), ('Finn', 'Wolfhard', 'Mies');
+  VALUES 
+    ('Bill', 'Skarsgard', 'Mies'), 
+    ('Jaeden', 'Martell', 'Mies'), 
+    ('Sophia', 'Lillis', 'Nainen'), 
+    ('Finn', 'Wolfhard', 'Mies'),
+    ('John', 'Travolta', 'Mies'),
+    ('Samue L.', 'Jackson', 'Mies'),
+    ('Uma', 'Thurman', 'Nainen'),
+    ('Harvey', 'Keitel', 'Mies');
+
 
 INSERT INTO nayttelija_rooli (nayttelija_id, elokuva_id, rooli)
-  VALUES (1, 1, 'Pennywise'), (2, 1, 'Bill Denbrough'), (3, 1, 'Beverly Marsh'), (4, 1, 'Richie Tozier');
+  VALUES 
+    (1, 1, 'Pennywise'), 
+    (2, 1, 'Bill Denbrough'),
+    (3, 1, 'Beverly Marsh'), 
+    (4, 1, 'Richie Tozier'),
+    (5, 2, 'Vincent Vega'),
+    (6, 2, 'Jules Winnfield'),
+    (7, 2, 'Mie Wallace'),
+    (7, 2, 'Mie Wallace'),
+    (8, 2, 'Winston Wolfe');
 
   INSERT INTO arvostelu(elokuva_id, arvostelija, tahdet, kommentti)
-    VALUES (1, 'Saku', 3, 'Hui pelotti ihan viitust');
+    VALUES 
+    (1, 'Saku', 3, 'Hui pelotti ihan viitust'),
+    (2, 'Roni', 5, 'Hemmetin hyvä elokuva, suosittelen');
