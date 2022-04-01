@@ -84,7 +84,12 @@ require_once "../head.php";
         ?>
       </datalist>
     </div>
-        
+
+    <div class="col-6">
+      <label for="kuva-input" class="form-label">Kuvan URL:</label>
+      <input type="text" name="kuva" id="kuva-input" class="form-control">
+    </div>
+
     <h5>Lisää näyttelijöitä</h5>
     <div class="col-12 row" id="nayttelija-lisaus">
       <div class="nayttelija-rivi row mt-2">
@@ -137,6 +142,7 @@ require_once "../head.php";
         <button type="button" id="lisaa-nayttelija" class="btn btn-secondary">Lisää näyttelijöitä</button>
       </div>
     </div>
+
 
 
     <div class="col-12 d-grid">

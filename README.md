@@ -7,12 +7,16 @@ DELETE: Mahdollisuus poistaa arvostelu?
 
 
 ## TODO:
-- [ ] Etusivu, jossa näkyisi muutamia elokuva julisteineen.
+- [x] Etusivu, jossa näkyisi muutamia elokuva julisteineen.
 - [ ] Sivu, jolla on html taulu kaikista elokuvista.
-- [ ] Dynaamisesti joka elokuvalle omasivu, jolla näkee kaikki elokuvaan liittyvät tiedot. Lisäksi nappi, jolla pääsee muokkaus tilaan ja jokaista elokuvaan liittyvää tieto voisi muokata (Myös näyttelijät, ohjaajat, genre jne.)
-- [ ] Jokaisella elokuva sivulla voi lisätä arvostelun.
+- [x] Elokuvan poisto
+- [ ] Elokuvan tietojen muokkaus
+-  [ ] Nappi, jolla pääsee muokkaustilaan ja jokaista elokuvaan liittyvää tieto voisi muokata (Myös näyttelijät, ohjaajat, genre jne.)
+- [x] Jokaisella elokuva sivulla voi lisätä arvostelun.
+  - [ ] arvostelut näkyy jokaisen elokuvan omalla sivulla
 - [ ] Sivu jolla voi lisätä uuden elokuvan kaikkineen tietoineen.
-  - [ ] Myös näyttelijät, ohjaaja yms. (ei arvostelua)
+  - [x] Myös näyttelijät, ohjaaja yms. (ei arvostelua)
 - [ ] Projektin rakenne muuttaa Meijan tunnilla käydyllä tavalla
 - [ ] Muuta git repon nimeä
 - [ ] Navigointi palkki 
+- [ ] Ulkonäkö bootstraping avulla
