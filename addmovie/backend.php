@@ -8,6 +8,7 @@ $kieli = filter_input(INPUT_POST, "kieli");
 $ikaraja = filter_input(INPUT_POST, "ikaraja", FILTER_VALIDATE_INT);
 $ohjaaja = filter_input(INPUT_POST, "ohjaaja");
 $genre = filter_input(INPUT_POST, "genre");
+$kuva_url = filter_input(INPUT_POST, "kuva", FILTER_DEFAULT);
 $nayttelijat = filter_input(INPUT_POST, "nayttelijat", FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
 # Tarkistaa, että kaikki vaadittavat parametrit on löytyy
@@ -24,8 +25,18 @@ if (!filter_var($vuosi, FILTER_VALIDATE_INT) || !filter_var($kesto, FILTER_VALID
   exit();
 }
 
+#echo var_dump($ikaraja);
+#echo "<br>";
+#echo var_dump(!$ikaraja);
+#echo "<br>";
+
+if(!$ikaraja) {
+  #echo "test";
+}
+
 # Varmistaa, että ikäraja on tyhjä, 0, 7, 16 tai 18
-if (!empty($ikaraja) && $ikaraja !== '7' && $ikaraja !== '16' && $ikaraja !== '18') {
+if ($ikaraja !== 0 && $ikaraja !== 7 && $ikaraja !== 16 && $ikaraja !== 18) {
+ 
   http_response_code(400);
   print json_encode(array("error" => "'Ikaraja' tulee olla tyhjä, 0, 7, 16 tai 18"));
   exit();
@@ -44,7 +55,7 @@ try {
   $ohjaaja_id = luoOhjaaja($db, $ohjaaja);
   $genre_id = luoGenre($db, $genre);
 
-  $sql = "INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id) VALUES (?,?,?,?,?,?,?)";
+  $sql = "INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id, kuva_url) VALUES (?,?,?,?,?,?,?,?)";
 
   $pdoStatement = $db->prepare($sql);
   $pdoStatement->bindParam(1, $nimi);
@@ -54,6 +65,7 @@ try {
   $pdoStatement->bindParam(5, $ohjaaja_id);
   $pdoStatement->bindParam(6, $ikaraja);
   $pdoStatement->bindParam(7, $genre_id);
+  $pdoStatement->bindParam(8, $kuva_url);
 
   $pdoStatement->execute();
   
