@@ -39,8 +39,7 @@ if ( $rowCount > 0 ) {
     </form>';
   }
 } else {
-  
-  echo "Elokuvaa ei löytynyt syöttämäsi ID:n perusteella";
+  echo "<h3 style='color:red'> Elokuvaa ei löytynyt syöttämäsi ID:n perusteella <h3>";
   exit;
 }
 ?>
