@@ -17,7 +17,7 @@ require_once "head.php";
         $result = $query->fetchAll();
 
         foreach ($result as $row) {
-          echo "<option value=\"{$row['nimi']}\"}>";
+          echo "<option value=\"{$row['nimi']}\">";
         }
       } catch (PDOException $e) {
         returnError($e);
@@ -27,10 +27,10 @@ require_once "head.php";
   </div>
   <div class="col-2">
     <label for="tahdet" class="form-label">Tähdet:</label>
-    <select class="form-select" id="tahdet">
+    <select class="form-select" id="tahdet" name="tahdet">
       <?php
       foreach (range(1, 5) as $tahdet) {
-        echo "<option>{$tahdet}</option>";
+        echo "<option value='{$tahdet}'>$tahdet</option>";
       }
       ?>
     </select>
@@ -42,7 +42,7 @@ require_once "head.php";
 
   <div class="col-4">
     <label for="arvostelija"> Arvostelija: </label>
-    <input name="arvotelija" id="arvostelija"><br>
+    <input name="arvostelija" id="arvostelija"><br>
 
   </div>
   <input type="submit" value="Lisää">

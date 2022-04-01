@@ -1,8 +1,8 @@
 <?php
 require_once "./inc/functions.php";
 
-$nimi = filter_input(INPUT_POST, "nimi");
-$tahdet = filter_input(INPUT_POST, "tahdet", FILTER_VALIDATE_INT);
+$nimi = filter_input(INPUT_POST, "elokuva");
+$tahdet = filter_input(INPUT_POST, "tahdet");
 $kommentti = filter_input(INPUT_POST, "kommentti");
 $arvostelija = filter_input(INPUT_POST, "arvostelija");
 
@@ -21,17 +21,24 @@ try {
   }
   
   ## TEE TÄSSÄ ENSIN GENRE ID JA OHJAAJA ID TARKASTUS JA MAHDOLLINEN LUONTI
+  $sql2 ="SELECT id FROM `elokuva` WHERE `nimi` = ?";
 
-  $sql = "INSERT INTO elokuva (nimi, tahdet, kommentti, arvostelija) VALUES (?,?,?,?)";
+  $pdoStatement2 = $db->prepare($sql2);
+  $pdoStatement2->bindParam(1, $nimi);
+  $pdoStatement2->execute();
+  $elokuva_id = $pdoStatement2->fetchColumn();
+
+  $sql = "INSERT INTO arvostelu (elokuva_id, tahdet, kommentti, arvostelija) VALUES (?,?,?,?)";
 
   $pdoStatement = $db->prepare($sql);
-  $pdoStatement->bindParam(1, $nimi);
+  $pdoStatement->bindParam(1, $elokuva_id);
   $pdoStatement->bindParam(2, $tahdet);
   $pdoStatement->bindParam(3, $kommentti);
   $pdoStatement->bindParam(4, $arvostelija);
 
   $pdoStatement->execute();
 
+  header("Location: ./addrating.php");
   # Tee tästä paremi -> palauta vain json ja tee frontendissä sen näyttäminen -> poista page auto refresh after post
   #header("Location: http://localhost/xx/workTime.php", true, 301);
   #echo "Käyttäjälle:" . $personid . " lisättiin uusi työaika merkintä.";
