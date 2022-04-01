@@ -87,7 +87,6 @@ INSERT INTO nayttelija_rooli (nayttelija_id, elokuva_id, rooli)
     (5, 2, 'Vincent Vega'),
     (6, 2, 'Jules Winnfield'),
     (7, 2, 'Mie Wallace'),
-    (7, 2, 'Mie Wallace'),
     (8, 2, 'Winston Wolfe');
 
   INSERT INTO arvostelu(elokuva_id, arvostelija, tahdet, kommentti)
