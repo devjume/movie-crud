@@ -21,7 +21,7 @@ try {
     $pdoStatement->bindParam(1,  $id);
     $pdoStatement->execute();
 
-    
+    header("Location: movies.php");
 } catch (PDOException $e) {
     returnError($e);
   }
