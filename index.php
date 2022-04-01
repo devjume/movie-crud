@@ -16,8 +16,9 @@ try {
 } catch (PDOException $e) {
   returnError($e);
 }
+
 function createTableRow() {
-$sql = "SELECT * FROM `elokuva`";
+$sql = "SELECT * FROM `elokuva` where kuva_url IS not NULL ORDER BY RAND () limit 5";
 $pdo = openDB();
 $elokuvat = $pdo->query($sql);
 
