@@ -53,7 +53,7 @@ CREATE TABLE nayttelija_rooli (
   nayttelija_id int not null,
   elokuva_id int not null,
   rooli varchar(255),
-  FOREIGN KEY (nayttelija_id) REFERENCES nayttelija(id)
+  FOREIGN KEY (nayttelija_id) REFERENCES nayttelija(id),
   FOREIGN KEY (elokuva_id) REFERENCES elokuva(id)
 );
 
