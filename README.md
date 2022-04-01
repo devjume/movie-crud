@@ -15,3 +15,4 @@ DELETE: Mahdollisuus poistaa arvostelu?
   - [ ] Myös näyttelijät, ohjaaja yms. (ei arvostelua)
 - [ ] Projektin rakenne muuttaa Meijan tunnilla käydyllä tavalla
 - [ ] Muuta git repon nimeä
+- [ ] Navigointi palkki 
