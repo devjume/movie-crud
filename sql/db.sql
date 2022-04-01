@@ -25,7 +25,7 @@ CREATE TABLE elokuva (
   ikaraja int,
   ohjaaja_id int,
   genre_id int NOT NULL,
-  posterilinkki varchar(255),
+  kuva_url varchar(255),
   PRIMARY KEY (id),
   FOREIGN KEY (ohjaaja_id) REFERENCES ohjaaja(id),
   FOREIGN KEY (genre_id) REFERENCES genre(id),
@@ -53,7 +53,8 @@ CREATE TABLE nayttelija_rooli (
   nayttelija_id int not null,
   elokuva_id int not null,
   rooli varchar(255),
-  FOREIGN KEY (nayttelija_id) REFERENCES nayttelija(id)
+  FOREIGN KEY (nayttelija_id) REFERENCES nayttelija(id),
+  FOREIGN KEY (elokuva_id) REFERENCES elokuva(id)
 );
 
 INSERT INTO genre(nimi) VALUES ('Kauhu'), ('Draama/Rikos'), ('Toiminta');
@@ -62,9 +63,9 @@ INSERT INTO ohjaaja(nimi) VALUES
   ('Andy Muschietti'),
   ('Quentin Tarantino');
 
-INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id, posterilinkki)
+INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id, kuva_url)
   VALUES('IT', 2017, 135, 'Englanti', 1, 16, 1, 'https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzODM3Mzg@._V1_.jpg'),
-    ('Pulp Ficton', 1993, 154, 'Englanti', 2, 16, 2, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg');
+    ('Pulp Fiction', 1993, 154, 'Englanti', 2, 16, 2, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg');
 
 INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) 
   VALUES 
