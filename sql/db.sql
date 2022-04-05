@@ -25,7 +25,7 @@ CREATE TABLE elokuva (
   ikaraja int,
   ohjaaja_id int,
   genre_id int NOT NULL,
-  kuva_url varchar(255),
+  kuva_url text,
   PRIMARY KEY (id),
   FOREIGN KEY (ohjaaja_id) REFERENCES ohjaaja(id),
   FOREIGN KEY (genre_id) REFERENCES genre(id),
