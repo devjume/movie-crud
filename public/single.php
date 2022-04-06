@@ -6,29 +6,31 @@ require_once MODULES_DIR . "/inc/headers.php";
 
 $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 
-if (isset($_GET['id']) && $_GET['delete'] == true) {
-  $id = $_GET['id'];
-  try {
-    $pdo = openDB();
-    $sql = "delete from nayttelija_rooli where elokuva_id=?";
-    $pdoStatement = $pdo->prepare($sql);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
-
-    $sql2 = "delete from arvostelu where elokuva_id=?";
-    $pdoStatement = $pdo->prepare($sql2);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
-
-    $sql3 = "delete from elokuva where id=?";
-    $pdoStatement = $pdo->prepare($sql3);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
-
-    header('Location: movies.php', true, 303);
-    exit;
-  } catch (PDOException $e) {
-    returnError($e);
+if (isset($_GET['id']) && isset($_GET['delete'])) {
+  if($_GET['delete'] == true) {
+    $id = $_GET['id'];
+    try {
+      $pdo = openDB();
+      $sql = "delete from nayttelija_rooli where elokuva_id=?";
+      $pdoStatement = $pdo->prepare($sql);
+      $pdoStatement->bindParam(1,  $id);
+      $pdoStatement->execute();
+    
+      $sql2 = "delete from arvostelu where elokuva_id=?";
+      $pdoStatement = $pdo->prepare($sql2);
+      $pdoStatement->bindParam(1,  $id);
+      $pdoStatement->execute();
+    
+      $sql3 = "delete from elokuva where id=?";
+      $pdoStatement = $pdo->prepare($sql3);
+      $pdoStatement->bindParam(1,  $id);
+      $pdoStatement->execute();
+    
+      header('Location: movies.php', true, 303);
+      exit;
+    } catch (PDOException $e) {
+      returnError($e);
+    }
   }
 }
 
