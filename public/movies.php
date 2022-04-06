@@ -1,7 +1,7 @@
 <?php
-require_once "./inc/functions.php";
-require_once "./inc/headers.php";
-require_once "head.php";
+include TEMPLATES_DIR . "head.php";
+require_once MODULES_DIR . "/inc/functions.php";
+require_once MODULES_DIR . "/inc/headers.php";
 ?>
 <h1>Kaikki elokuvat </h1>
 <table>

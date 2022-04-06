@@ -20,3 +20,4 @@ DELETE: Mahdollisuus poistaa arvostelu?
 - [ ] Muuta git repon nimeä
 - [ ] Navigointi palkki 
 - [ ] Ulkonäkö bootstraping avulla
+- [ ] Useampi genre elokuvalle

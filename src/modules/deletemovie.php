@@ -1,6 +1,6 @@
 <?php
-require_once "./inc/functions.php";
-require_once "./inc/headers.php";
+require_once MODULES_DIR . "/inc/functions.php";
+require_once MODULES_DIR . "/inc/headers.php";
 
 $id = $_GET['id'];
 

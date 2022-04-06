@@ -1,14 +1,8 @@
 <?php
-include "./head.php";
-require_once "./inc/functions.php";
-require_once "./inc/headers.php";
+include TEMPLATES_DIR."head.php";
+require_once MODULES_DIR."/inc/functions.php";
+require_once MODULES_DIR ."/inc/headers.php";
 echo '<h1>Index</h1>';
-echo "<br>";
-echo "<a href='./addmovie/addmovie.php'>Lisää elokuva</a>";
-echo "<br>";
-echo "<a href='movies.php'>Elokuvat</a>";
-echo "<br>";
-echo "<a href='./single.php?id=1'>Yksittäinen elokuva (Muuta id -> katso url '?id=2'</a>";
 echo "<br>";
 
 try {
@@ -30,4 +24,4 @@ $elokuvat = $pdo->query($sql);
   }
   echo "</ul>";
 }}
-include "./foot.php";
+include TEMPLATES_DIR."foot.php";
