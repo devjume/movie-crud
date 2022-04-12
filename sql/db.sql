@@ -57,15 +57,23 @@ CREATE TABLE nayttelija_rooli (
   FOREIGN KEY (elokuva_id) REFERENCES elokuva(id)
 );
 
-INSERT INTO genre(nimi) VALUES ('Kauhu'), ('Draama/Rikos'), ('Toiminta');
+INSERT INTO genre(nimi) VALUES ('Kauhu'), ('Draama/Rikos'), ('Toiminta'), ('Mysteeri');
 
 INSERT INTO ohjaaja(nimi) VALUES 
   ('Andy Muschietti'),
-  ('Quentin Tarantino');
+  ('Quentin Tarantino'),
+  ('Matt Reeves'),
+  ('Jon Watts'),
+  ('Rian Johnson'),
+  ('Todd Phillips');
 
 INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id, kuva_url)
   VALUES('IT', 2017, 135, 'Englanti', 1, 16, 1, 'https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzODM3Mzg@._V1_.jpg'),
-    ('Pulp Fiction', 1993, 154, 'Englanti', 2, 16, 2, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg');
+    ('Pulp Fiction', 1993, 154, 'Englanti', 2, 16, 2, 'https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg'),
+    ('The Batman', 2022, 176, 'Englanti', 3, 16, 3, 'https://upload.wikimedia.org/wikipedia/fi/9/9a/The-Batman-2022-Teaser-Poster.jpg'),
+    ('Spider-Man: No Way Home',2021, 148, 'Englanti', 4, 16, 3, 'https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg'),
+    ('Knives Out', 2019, 130, 'Englanti',5, 16, 4, 'https://upload.wikimedia.org/wikipedia/en/1/1f/Knives_Out_poster.jpeg' ),
+    ('Joker', 2019, 122, 'Englanti', 6, 16, 2, 'https://upload.wikimedia.org/wikipedia/en/e/e1/Joker_%282019_film%29_poster.jpg');
 
 INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) 
   VALUES 
@@ -77,7 +85,6 @@ INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli)
     ('Samue L.', 'Jackson', 'Mies'),
     ('Uma', 'Thurman', 'Nainen'),
     ('Harvey', 'Keitel', 'Mies');
-
 
 INSERT INTO nayttelija_rooli (nayttelija_id, elokuva_id, rooli)
   VALUES 

@@ -49,7 +49,7 @@ left join ohjaaja on elokuva.ohjaaja_id = ohjaaja.id WHERE elokuva.genre_id = $i
     if ($elokuvat->rowCount() > 0) {
       while ($row = $elokuvat->fetch()) {
         echo '<div class="col-3"> <div class="card" style="width: 18rem;">
-      <img src="' . $row["kuva_url"] . 'class="card-img-top" alt="...">
+      <img src="' . $row["kuva_url"] . '"class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">' . $row["elokuva"] . '</h5>
     <ul class="list-group list-group-flush">
