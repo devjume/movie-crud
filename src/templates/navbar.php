@@ -22,16 +22,33 @@
           <a class="nav-link active" aria-current="page" href="single.php?id=1">Yksittäinen elokuva (?id=X)</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Genret
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Komedia</a></li>
-            <li><a class="dropdown-item" href="#">Kauhu</a></li>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <?php
+            require_once MODULES_DIR . "/inc/functions.php";
+            try {
+              $db = openDB();
+
+              $sql = "SELECT `id`, `nimi` FROM `genre`;";
+              $query = $db->query($sql);
+              $result = $query->fetchAll();
+
+              foreach ($result as $row) {
+                echo "<option value=\"{$row['nimi']}\"}>";
+                echo "<li><a class='dropdown-item' href='movies.php?id={$row['id']}'>{$row['nimi']}</a></li>";
+              }
+            } catch (PDOException $e) {
+              returnError($e);
+            }
+            ?>
+           <!--  <li><a class="dropdown-item" href="movies.php?id=1">Komedia</a></li>
+            <li><a class="dropdown-item" href="#">Kauhu</a></li> -->
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="movies.php">Kaikki elokuvat</a></li>
+            <li><a class="dropdown-item" href="movies.php?id=0">Kaikki elokuvat</a></li>
           </ul>
         </li>
       </ul>
