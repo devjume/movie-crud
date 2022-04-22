@@ -37,7 +37,7 @@
           <a class="nav-link active" aria-current="page" href="addmovie.php">Lisää Elokuva</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="addrating.php">Lisää Arvostelu</a>
+          <a class="nav-link active" aria-current="page" href="addrating.php">Anna Arvostelu</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="single.php?id=1">Yksittäinen elokuva (?id=X)</a>
