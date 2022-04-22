@@ -45,6 +45,7 @@ function lisaaElokuva($nimi, $vuosi, $kesto, $kieli, $ohjaaja, $ikaraja, $genre,
       $nayttelijaId = luoNayttelija($db, $nayttelija);
       luoRooli($db, $nayttelijaId, $elokuvaId, $nayttelija['rooli']);
     }
+
     return "Elokuva Lisätty";
   } catch (PDOException $e) {
     return $e;
@@ -55,7 +56,7 @@ function luoNayttelija($db, $nayttelija) {
   $sql= "INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) VALUES (?,?,?)";
   $pdo = $db->prepare($sql);
   $pdo->bindParam(1, $nayttelija['nimi']);
-  $pdo->bindParam(2, $nayttelija['sukunimi']);
+  $pdo->bindParam(2, $nayttelija['rooli']);
   $pdo->bindParam(3, $nayttelija['sukupuoli']);
   $pdo->execute();
   return $db->lastInsertId();

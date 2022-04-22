@@ -18,4 +18,4 @@ define('ROOT', 'http://localhost/moviedb-backend');
 <body>
 
 <?php 
-include "navbar.php"; ?>
+include_once "navbar.php"; ?>
