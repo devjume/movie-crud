@@ -105,7 +105,9 @@ if ($request_method === 'POST') {
       <input name="arvostelija" id="arvostelija" class="form-control"><br>
 
     </div>
-    <input type="submit" value="Lisää">
+    <div class="col-12 d-grid">
+      <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
   </form>
 </div>
 
