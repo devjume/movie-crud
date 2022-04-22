@@ -156,3 +156,9 @@ INSERT INTO
   `ohjaaja` (`ohjaaja_id`, `ohjaaja_enimi`, `ohjaaja_snimi`)
 VALUES
   (4, 'Matthew', 'Matthew Vaughn	');
+
+
+SELECT elokuva.nimi,elokuva.vuosi, elokuva.kesto,elokuva.kieli, elokuva.ikaraja, ohjaaja.nimi AS 'Ohjaaja', genre.nimi AS 'Genre', elokuva.posterilinkki 
+FROM elokuva
+INNER JOIN ohjaaja ON elokuva.ohjaaja_id = ohjaaja.id 
+INNER JOIN genre ON elokuva.genre_id = genre.id;
