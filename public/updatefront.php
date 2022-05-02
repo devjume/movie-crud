@@ -27,8 +27,8 @@ $genre_vanha = filter_input(INPUT_POST, "genre_vanha");
 <th>Kieli</th>
 <th>Ikäraja</th>
 <th>Ohjaaja</th>
-<th>Genre</th>
 <th>Posterilinkki</th>
+<th>Genre</th>
 <th>Muokkaa</th>
 </tr>
 <?php
