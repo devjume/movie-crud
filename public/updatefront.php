@@ -10,6 +10,8 @@ $ikaraja = filter_input(INPUT_POST, "ikaraja");
 $ohjaaja_id = filter_input(INPUT_POST, "ohjaaja_id");
 $genre_id = filter_input(INPUT_POST, "genre_id");
 $kuva_url = filter_input(INPUT_POST, "kuva_url");
+$ohjaaja_vanha = filter_input(INPUT_POST, "ohjaaja_vanha");
+$genre_vanha = filter_input(INPUT_POST, "genre_vanha");
 ?>
 
 <table>
@@ -32,11 +34,11 @@ $kuva_url = filter_input(INPUT_POST, "kuva_url");
 <?php
 require_once MODULES_DIR . "/inc/functions.php";
 require_once MODULES_DIR . "/inc/headers.php";
+require_once MODULES_DIR . "updatemovie.php";
 $id = $_GET['id'];
 try {
-    echo $id;
   $pdo = openDB();
-  $sql = "SELECT elokuva.id, elokuva.nimi,elokuva.vuosi, elokuva.kesto,elokuva.kieli, elokuva.ikaraja, ohjaaja.nimi AS 'Ohjaaja', genre.nimi AS 'Genre', elokuva.kuva_url 
+  $sql = "SELECT elokuva.id, elokuva.nimi,elokuva.vuosi, elokuva.kesto,elokuva.kieli, elokuva.ikaraja, ohjaaja.nimi AS 'Ohjaaja', genre.id AS 'Genre', elokuva.kuva_url 
   FROM elokuva
   INNER JOIN ohjaaja ON elokuva.ohjaaja_id = ohjaaja.id 
   INNER JOIN genre ON elokuva.genre_id = genre.id ";
@@ -44,17 +46,61 @@ try {
   
   $pdoStatement->execute();
   $rowCount = $pdoStatement->rowCount();
+  
 } catch (PDOException $e) {
   returnError($e);
 }
+
+if(isset($id)){
+  try{
+      updateMovie($id, $nimi, $vuosi, $kesto, $kieli, $ikaraja, $ohjaaja_id, $genre_id, $kuva_url, $ohjaaja_vanha, $genre_vanha);
+      echo '<div class="alert alert-success" role="alert">Elokuvaa muokattu!</div>';
+  }catch(Exception $e){
+      echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
+  }
+  
+}
+
 if ( $rowCount > 0 ) {
   while($row = $pdoStatement->fetch()) {
-    echo '<form method="post" action="updatefront.php?id='. $row["id"] .'">'.
-     
-    '<tr>' . '<td> <input name="nimi" value='. $row["nimi"] . '></td>' . '<td>' . $row["vuosi"] . '</td>' . '<td>' . $row["kesto"] . '</td>' . '<td>' . $row["kieli"] . '</td>' . '<td>' . $row["ikaraja"] . '</td>'. '<td>' . $row["Ohjaaja"] . '</td>'. '<td>' . $row["Genre"] . '</td>' . '<td>' . $row["kuva_url"] . '</td>' . 
-   
-    '<td><button type="submit">Muokkaa elokuvaa</button></td>
-    </form>' . "</tr>" ;
+    ?>
+    <form method="post" action="updatefront.php?id=  <?php echo $row["id"] ?>">
+    <tr><td> <input name="nimi" value= "<?php echo ($row["nimi"]) ?>"></td>
+    <td> <input name="vuosi" value= "<?php echo $row["vuosi"] ?>"> </td>
+    <td> <input name="kesto" value= "<?php echo $row["kesto"] ?>"> </td>
+    <td> <input name="kieli" value= "<?php echo $row["kieli"] ?>"> </td>
+    <td> <input name="ikaraja" value= "<?php echo $row["ikaraja"] ?>"> </td>
+    <td> <input name="ohjaaja_id" value= "<?php print $row["Ohjaaja"] ?>"> </td>
+    <td> <input name="kuva_url" value= "<?php echo $row["kuva_url"] ?>"></td>
+    <input type="hidden" name="ohjaaja_vanha" value="<?php print $row["Ohjaaja"] ?>"></input>
+    <td> <select name="genre_id" value= "<?php echo $row["Genre"] ?>">
+    <?php
+            require_once MODULES_DIR . "/inc/functions.php";
+            try {
+              $db = openDB();
+
+              $sql = "SELECT `id`, `nimi` FROM `genre`;";
+              $query = $db->query($sql);
+              $result = $query->fetchAll();
+
+              foreach ($result as $row1) {
+                if($row1['id'] == $row["Genre"]){
+                  echo "<option selected value=\"{$row1['id']}\">{$row1['nimi']}</option>";
+                }
+                else{
+                  echo "<option value=\"{$row1['id']}\">{$row1['nimi']}</option>";
+                }
+              }
+            } catch (PDOException $e) {
+              returnError($e);
+            }
+            ?>
+    </select> </td>
+    <td><button type="submit">Muokkaa elokuvaa</button></td>
+    </form></tr>
+
+    
+    <?php
   }
 } else {
   echo "<h3 style='color:red'> Elokuvaa ei löytynyt syöttämäsi ID:n perusteella <h3>";

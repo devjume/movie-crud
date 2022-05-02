@@ -46,10 +46,8 @@ INSERT INTO nayttelija_rooli (nayttelija_id, elokuva_id, rooli)
     (1, 'Saku', 3, 'Hui pelotti ihan viitust'),
     (2, 'Roni', 5, 'Hemmetin hyvä elokuva, suosittelen');
 
-    16,
-    1,
-    'https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzODM3Mzg@._V1_.jpg'
-  ),
+    INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id, kuva_url)
+    VALUES('IT', 2017, 135, 'Englanti', 1, 16, 1, 'https://m.media-amazon.com/images/M/MV5BZDVkZmI0YzAtNzdjYi00ZjhhLWE1ODEtMWMzMWMzNDA0NmQ4XkEyXkFqcGdeQXVyNzYzODM3Mzg@._V1_.jpg'),
   (
     'Pulp Fiction',
     1993,
