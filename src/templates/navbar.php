@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
+  <div class="container">
     <a class="navbar-brand" href="./">MovieDB</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -21,15 +21,12 @@
               $result = $query->fetchAll();
 
               foreach ($result as $row) {
-                echo "<option value=\"{$row['nimi']}\"}>";
                 echo "<li><a class='dropdown-item' href='movies.php?id={$row['id']}'>{$row['nimi']}</a></li>";
               }
             } catch (PDOException $e) {
               returnError($e);
             }
             ?>
-            <!--  <li><a class="dropdown-item" href="movies.php?id=1">Komedia</a></li>
-            <li><a class="dropdown-item" href="#">Kauhu</a></li> -->
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -40,7 +37,7 @@
           <a class="nav-link active" aria-current="page" href="addmovie.php">Lisää Elokuva</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="addrating.php">Lisää Arvostelu</a>
+          <a class="nav-link active" aria-current="page" href="addrating.php">Anna Arvostelu</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="single.php?id=1">Yksittäinen elokuva (?id=X)</a>

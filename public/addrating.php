@@ -15,9 +15,9 @@ if ($request_method === 'POST') {
   $arvostelija = filter_input(INPUT_POST, "arvostelija");
 
   // Jos post parametreja on määritelty -> tarkastaa ne ja kutsuu funktiota modules/addrating.php tiedostosta
-  if(!empty($_POST)) {
+  if (!empty($_POST)) {
     require_once MODULES_DIR . "addrating.php";
-  
+
     # Tarkistaa, että kaikki vaadittavat parametrit on löytyy
     if (!isset($nimi) || !isset($tahdet) || empty($nimi) || empty($tahdet)) {
       #http_response_code(400);
@@ -58,53 +58,60 @@ if ($request_method === 'POST') {
 }
 ?>
 
+<div class="container pt-2">
+  <h3>Anna arvostelu</h3>
 
-<form action="addrating.php" method="POST" id="elokuva-form" class="row g-3">
-  <div class="col-1">
-    <label for="elokuva" class="form-label">Elokuva:</label>
-    <input list="elokuva-dl" name="elokuva" id="elokuva-input" class="form-control" placeholder="Elokuva">
-    <datalist id="elokuva-dl">
+  <form action="addrating.php" method="POST" id="elokuva-form" class="row g-3">
+    <div class="col-2">
+      <label for="elokuva" class="form-label">Elokuva:</label>
+      <input list="elokuva-dl" name="elokuva" id="elokuva-input" class="form-control" placeholder="Elokuva">
+      <datalist id="elokuva-dl">
 
-      <?php
-      require_once MODULES_DIR . "/inc/functions.php";
-      try {
-        $db = openDB();
+        <?php
+        require_once MODULES_DIR . "/inc/functions.php";
+        try {
+          $db = openDB();
 
-        $sql = "SELECT `nimi` FROM `elokuva`;";
-        $query = $db->query($sql);
-        $result = $query->fetchAll();
+          $sql = "SELECT `nimi` FROM `elokuva`;";
+          $query = $db->query($sql);
+          $result = $query->fetchAll();
 
-        foreach ($result as $row) {
-          echo "<option value=\"{$row['nimi']}\">";
+          foreach ($result as $row) {
+            echo "<option value=\"{$row['nimi']}\">";
+          }
+        } catch (PDOException $e) {
+          returnError($e);
         }
-      } catch (PDOException $e) {
-        returnError($e);
-      }
-      ?>
-    </datalist>
-  </div>
-  <div class="col-2">
-    <label for="tahdet" class="form-label">Tähdet:</label>
-    <select class="form-select" id="tahdet" name="tahdet">
-      <?php
-      foreach (range(1, 5) as $tahdet) {
-        echo "<option value='{$tahdet}'>$tahdet</option>";
-      }
-      ?>
-    </select>
-  </div>
-  <div class="col-3">
-    <label for="kommentti"> Arvostelu: </label>
-    <textarea name="kommentti" id="kommentti"></textarea><br>
-  </div>
+        ?>
+      </datalist>
+    </div>
+    <div class="col-1">
+      <label for="tahdet" class="form-label">Tähdet:</label>
+      <select class="form-select" id="tahdet" name="tahdet">
+        <?php
+        foreach (range(1, 5) as $tahdet) {
+          echo "<option value='{$tahdet}'>$tahdet</option>";
+        }
+        ?>
+      </select>
+    </div>
+    <div class="col-6">
+      <label for="kommentti" class="form-label"> Arvostelu: </label>
+      <textarea name="kommentti" id="kommentti" rows="1" class="form-control h-25"></textarea>
+    </div>
 
-  <div class="col-4">
-    <label for="arvostelija"> Arvostelija: </label>
-    <input name="arvostelija" id="arvostelija"><br>
+    <div class="col-3">
+      <label for="arvostelija" class="form-label"> Arvostelija: </label>
+      <input name="arvostelija" id="arvostelija" class="form-control"><br>
 
-  </div>
-  <input type="submit" value="Lisää">
-</form>
+    </div>
+    <div class="col-12 d-grid">
+      <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+  </form>
+</div>
+
+
 
 
 
