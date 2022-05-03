@@ -1,7 +1,7 @@
 <?php
 include TEMPLATES_DIR . "head.php";
 if (!isset($_SESSION['username'])) {
-  header("Location: ".PUBLIC_DIR."index.php");
+  header("Location: index.php");
   $_SESSION['msg'] = "You have to log in first";
   exit;
 }
