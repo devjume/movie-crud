@@ -178,8 +178,14 @@ if ($request_method === 'POST') {
       <div class="nayttelija-rivi row mt-2">
         <div class="col-2">
           <div class="form-floating">
-            <input list="nayttelijat" name="nayttelijat[1][nimi]" id="nayttelija-input-1" class="form-control" placeholder="Nimi">
-            <label for="nayttelija-input-1">Nimi</label>
+            <input list="nayttelijat" name="nayttelijat[1][etunimi]" id="nayttelija-input-1" class="form-control" placeholder="Etunimi">
+            <label for="nayttelija-input-1">Etunimi</label>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="form-floating">
+            <input list="nayttelijat2" name="nayttelijat[1][sukunimi]" id="nayttelija-input-2" class="form-control" placeholder="Sukunimi">
+            <label for="nayttelija-input-2">Sukunimi</label>
           </div>
         </div>
         <div class="col-2">
@@ -206,12 +212,30 @@ if ($request_method === 'POST') {
           try {
             $db = openDB();
 
-            $sql = "SELECT `id`, CONCAT(`etunimi`, ' ', `sukunimi`) AS nimi FROM `nayttelija`;";
+            $sql = "SELECT `id`, `etunimi`FROM `nayttelija`;";
             $query = $db->query($sql);
             $result = $query->fetchAll();
 
             foreach ($result as $row) {
-              echo "<option value=\"{$row['nimi']}\"}>";
+              echo "<option value=\"{$row['etunimi']}\"}>";
+            }
+          } catch (PDOException $e) {
+            returnError($e);
+          }
+          ?>
+        </datalist>
+        <datalist id="nayttelijat2">
+          <?php
+          require_once MODULES_DIR . "/inc/functions.php";
+          try {
+            $db = openDB();
+
+            $sql = "SELECT `id`, `sukunimi` FROM `nayttelija`;";
+            $query = $db->query($sql);
+            $result = $query->fetchAll();
+
+            foreach ($result as $row) {
+              echo "<option value=\"{$row['sukunimi']}\"}>";
             }
           } catch (PDOException $e) {
             returnError($e);
