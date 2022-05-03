@@ -6,7 +6,7 @@
 //jos haluat. Kommentoi silloin seuraavat rivit.
 
 function getPdoConnection(){
-	$init = parse_ini_file(BASE_DIR."myconf.ini");
+	$init = parse_ini_file(BASE_DIR."conf.ini");
 	$host = $init["host"];
 	$db = $init["db"];
 	$user = $init["username"];
