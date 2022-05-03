@@ -55,8 +55,8 @@ function lisaaElokuva($nimi, $vuosi, $kesto, $kieli, $ohjaaja, $ikaraja, $genre,
 function luoNayttelija($db, $nayttelija) {
   $sql= "INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) VALUES (?,?,?)";
   $pdo = $db->prepare($sql);
-  $pdo->bindParam(1, $nayttelija['nimi']);
-  $pdo->bindParam(2, $nayttelija['rooli']);
+  $pdo->bindParam(1, $nayttelija['etunimi']);
+  $pdo->bindParam(2, $nayttelija['sukunimi']);
   $pdo->bindParam(3, $nayttelija['sukupuoli']);
   $pdo->execute();
   return $db->lastInsertId();
