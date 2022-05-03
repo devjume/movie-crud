@@ -3,7 +3,7 @@ include TEMPLATES_DIR . "head.php";
 require_once MODULES_DIR . "/inc/functions.php";
 require_once MODULES_DIR . "/inc/headers.php";
 if (!isset($_SESSION['username'])) {
-  header("Location: ".PUBLIC_DIR."index.php");
+  header("Location: index.php");
   $_SESSION['msg'] = "You have to log in first";
   exit;
 }
