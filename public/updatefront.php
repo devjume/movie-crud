@@ -113,3 +113,7 @@ if ( $rowCount > 0 ) {
 }
 ?>
 </table>
+
+<?php
+include TEMPLATES_DIR . "foot.php";
+?>
