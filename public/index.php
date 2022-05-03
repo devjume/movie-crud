@@ -10,7 +10,9 @@ include TEMPLATES_DIR . "movieCard.php";
   <div class="row row-cols-3 row-cols-md-3 g-1">
     <?php
     try {
-      $sql = "SELECT * FROM `elokuva` where kuva_url IS not NULL ORDER BY RAND () limit 5";
+      $sql = "SELECT elokuva.id as id, elokuva.nimi as elokuva, vuosi, kesto, kieli, ikaraja, kuva_url, ohjaaja.nimi as ohjaaja FROM elokuva
+      left join ohjaaja on elokuva.ohjaaja_id = ohjaaja.id
+      where kuva_url IS not NULL ORDER BY RAND () limit 5";
       $pdo = openDB();
       $elokuvat = $pdo->query($sql);
 
