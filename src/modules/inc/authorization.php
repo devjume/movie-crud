@@ -1,7 +1,7 @@
 <?php
 function login($uname, $pw){
 
-    require_once MODULES_DIR.'/inc/db.php';
+    require_once MODULES_DIR.'/inc/functions.php';
 
     // $uname = filter_input(INPUT_POST, "username");
     // $pw = filter_input(INPUT_POST, "password");
@@ -17,7 +17,7 @@ function login($uname, $pw){
     }
 
     try{
-        $pdo = getPdoConnection();
+        $pdo = openDB();
         //Haetaan käyttäjä annetulla käyttäjänimellä
         $sql = "SELECT username, password, firstname, lastname FROM yllapitaja WHERE username=?";
         $statement = $pdo->prepare($sql);

@@ -1,5 +1,4 @@
 <?php
-include TEMPLATES_DIR.'head.php';
 include MODULES_DIR.'/inc/person.php';
 
     //Filtteroidaan POST-inputit (ei käytetä string-filtteriä, koska deprekoitunut)
@@ -20,7 +19,7 @@ include MODULES_DIR.'/inc/person.php';
     }
 
 ?>
-
+    <h3>Create an accout</h3>
     <form action="person.php" method="post">
         <label for="fname">First name:</label><br>
         <input type="text" name="fname" id="fname"><br>
@@ -30,7 +29,7 @@ include MODULES_DIR.'/inc/person.php';
         <input type="text" name="username" id="username"><br>
         <label for="password">Password:</label><br>
         <input type="password" name="password" id="password"><br>
-        <input type="submit" class="btn btn-primary" value="Add person">
+        <input type="submit" class="btn btn-primary" value="Create">
     </form>
 
 <?php   include TEMPLATES_DIR.'foot.php'; ?>

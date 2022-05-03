@@ -17,7 +17,7 @@ function getPeople(){
 }
 
 function addPerson($fname, $lname, $uname, $pw){
-    require_once MODULES_DIR.'/inc/db.php'; // DB connection
+    require_once MODULES_DIR.'/inc/functions.php';
     
     //Tarkistetaan onko muttujia asetettu
     if( !isset($fname) || !isset($lname) || !isset($uname) || !isset($pw) ){
@@ -30,7 +30,7 @@ function addPerson($fname, $lname, $uname, $pw){
     }
     
     try{
-        $pdo = getPdoConnection();
+        $pdo = openDB();
         //Suoritetaan parametrien lisääminen tietokantaan.
         $sql = "INSERT INTO yllapitaja (firstname, lastname, username, password) VALUES (?, ?, ?, ?)";
         $statement = $pdo->prepare($sql);
@@ -44,7 +44,7 @@ function addPerson($fname, $lname, $uname, $pw){
     
         $statement->execute();
     
-        echo "Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan"; 
+        header('Location: index.php');
     }catch(PDOException $e){
         throw $e;
     }

@@ -19,7 +19,7 @@ if(!isset($_SESSION["username"]) && isset($uname)){
 
     if(!isset($_SESSION["usename"])){
 ?>
-
+    <h3>Login</h3>
     <form action="login.php" method="post" class="">
         <label for="username">Username:</label><br>
         <input type="text" name="username" id="username"><br>
@@ -29,4 +29,4 @@ if(!isset($_SESSION["username"]) && isset($uname)){
     </form>
 
 
-<?php } include TEMPLATES_DIR.'foot.php'; ?>
+<?php } include 'person.php'; include TEMPLATES_DIR.'foot.php'; ?>
