@@ -57,6 +57,14 @@ CREATE TABLE nayttelija_rooli (
   FOREIGN KEY (elokuva_id) REFERENCES elokuva(id)
 );
 
+CREATE TABLE yllapitaja(  
+    ID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    firstname VARCHAR(150),
+    lastname VARCHAR(150),
+    username VARCHAR(150) UNIQUE,
+    password VARCHAR(150)
+);
+
 INSERT INTO genre(nimi) VALUES ('Kauhu'), ('Draama/Rikos'), ('Toiminta'), ('Mysteeri');
 
 INSERT INTO ohjaaja(nimi) VALUES 
