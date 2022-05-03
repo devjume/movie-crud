@@ -56,11 +56,23 @@ if (isset($_GET['id']) && isset($_GET['delete'])) {
 <?php 
 function showDeleteButton($id) {
 ?>
+<div class="d-flex flex-row mt-2">
+<a class="btn btn-primary me-2" href="updatefront.php" role="button">Muokkaa</a>
  <form method="GET" action="single.php">
     <input type="hidden" name="id" value="<?php echo $id ?>">
     <input type="hidden" name="delete" value="true">
-    <button type="submit" class="btn btn-danger mt-2">Poista elokuva</button>
+    <button type="submit" class="btn btn-danger">Poista elokuva</button>
   </form>
+  
+</div>
+<?php
+}
+?>
+
+<?php 
+function showEditButton() {
+?>
+
 <?php
 }
 ?>
@@ -89,6 +101,7 @@ function showMovieDetails($data) {
       </ul>
       <?php 
         if(isset($_SESSION["username"])){
+          showEditButton();
           showDeleteButton($data["id"]);
         }
        ?>
