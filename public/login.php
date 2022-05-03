@@ -19,11 +19,11 @@ if(!isset($_SESSION["username"]) && isset($uname)){
 
     if(!isset($_SESSION["usename"])){
 ?>
-    <h3>Login</h3>
+    <h3>Kirjaudu sisään</h3>
     <form action="login.php" method="post" class="">
-        <label for="username">Username:</label><br>
+        <label for="username">Käyttäjänimi:</label><br>
         <input type="text" name="username" id="username"><br>
-        <label for="password">Password:</label><br>
+        <label for="password">Salasana:</label><br>
         <input type="password" name="password" id="password"><br>
         <input type="submit" class="btn btn-primary" value="Log in">
     </form>

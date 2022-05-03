@@ -26,7 +26,7 @@ if (isset($_GET['id']) && isset($_GET['delete'])) {
       $pdoStatement->bindParam(1,  $id);
       $pdoStatement->execute();
 
-      header('Location: movies.php', true, 303);
+      header('Location: index.php', true, 303);
       exit;
     } catch (PDOException $e) {
       returnError($e);
@@ -54,7 +54,7 @@ if (isset($_GET['id']) && isset($_GET['delete'])) {
 ?>
 
 <?php 
-function showDeleteButton() {
+function showDeleteButton($id) {
 ?>
  <form method="GET" action="single.php">
     <input type="hidden" name="id" value="<?php echo $id ?>">
@@ -87,7 +87,11 @@ function showMovieDetails($data) {
         <li class="list-group-item fs-3">Genre: <?php echo $data["genre"] ?></li>
         <li class="list-group-item fs-3">Ohjaaja: <?php echo $data["ohjaaja"] ?></li>
       </ul>
-      <?php showDeleteButton(); ?>
+      <?php 
+        if(isset($_SESSION["username"])){
+          showDeleteButton($data["id"]);
+        }
+       ?>
     </div>
     
   </div>
