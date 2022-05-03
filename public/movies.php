@@ -6,8 +6,6 @@ require_once MODULES_DIR . "/inc/headers.php";
 include TEMPLATES_DIR . "movieCard.php";
 ?>
 <div class="container">
-<h1>Kaikki elokuvat </h1>
-  <div class="row row-cols-3 row-cols-md-3 g-1">
     <?php
 
     $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
@@ -21,9 +19,14 @@ include TEMPLATES_DIR . "movieCard.php";
     if ($id === 0) {
       $sql = "SELECT elokuva.id as id, elokuva.nimi as elokuva, vuosi, kesto, kieli, ikaraja, kuva_url, ohjaaja.nimi as ohjaaja FROM elokuva
               left join ohjaaja on elokuva.ohjaaja_id = ohjaaja.id";
+              echo '<h1>Kaikki elokuvat </h1><div class="row row-cols-3 row-cols-md-3 g-1">';
     } else {
-      $sql = "SELECT elokuva.id as id, elokuva.nimi as elokuva, vuosi, kesto, kieli, ikaraja, kuva_url, ohjaaja.nimi as ohjaaja FROM elokuva
-              left join ohjaaja on elokuva.ohjaaja_id = ohjaaja.id WHERE elokuva.genre_id = $id";
+      $sql = "SELECT elokuva.id as id, elokuva.nimi as elokuva, vuosi, kesto, kieli, ikaraja, kuva_url, ohjaaja.nimi as ohjaaja, genre.nimi as genre FROM elokuva
+              left join ohjaaja on elokuva.ohjaaja_id = ohjaaja.id left join genre on elokuva.genre_id = genre.id WHERE elokuva.genre_id = $id";
+              $pdo = openDB();
+              $elokuvat = $pdo->query($sql);
+              $row = $elokuvat->fetch();
+              echo '<h1>' .$row["genre"]. '</h1>'. '<div class="row row-cols-3 row-cols-md-3 g-1">';
     }
 
     $pdo = openDB();
