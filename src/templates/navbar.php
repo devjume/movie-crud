@@ -54,9 +54,9 @@
         }
         
                 if(isset($_SESSION["username"])){
-                    echo '<a class="nav-link btn btn-danger" href="logout.php">Log out</a>';
+                    echo '<a class="nav-link btn btn-danger" href="logout.php">Kirjaudu Ulos</a>';
                 }else{
-                    echo '<a class="nav-link btn btn-success" href="login.php">Log in</a>';
+                    echo '<a class="nav-link btn btn-success" href="login.php">Kirjaudu Sisään</a>';
                 }
             ?>
 

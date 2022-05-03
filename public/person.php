@@ -19,15 +19,15 @@ include MODULES_DIR.'/inc/person.php';
     }
 
 ?>
-    <h3>Create an accout</h3>
+    <h3>Luo uusi käyttäjä</h3>
     <form action="person.php" method="post">
-        <label for="fname">First name:</label><br>
+        <label for="fname">Etunimi:</label><br>
         <input type="text" name="fname" id="fname"><br>
-        <label for="lname">Last name:</label><br>
+        <label for="lname">Sukunimi:</label><br>
         <input type="text" name="lname" id="lname"><br>
-        <label for="username">Username:</label><br>
+        <label for="username">Käyttäjänimi:</label><br>
         <input type="text" name="username" id="username"><br>
-        <label for="password">Password:</label><br>
+        <label for="password">Salasana:</label><br>
         <input type="password" name="password" id="password"><br>
         <input type="submit" class="btn btn-primary" value="Create">
     </form>

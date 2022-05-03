@@ -44,7 +44,7 @@ function addPerson($fname, $lname, $uname, $pw){
     
         $statement->execute();
     
-        header('Location: index.php');
+        header('Location: login.php');
     }catch(PDOException $e){
         throw $e;
     }
