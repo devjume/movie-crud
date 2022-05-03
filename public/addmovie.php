@@ -1,6 +1,10 @@
 <?php
 include TEMPLATES_DIR . "head.php";
-
+if (!isset($_SESSION['username'])) {
+  header("Location: ".PUBLIC_DIR."index.php");
+  $_SESSION['msg'] = "You have to log in first";
+  exit;
+}
 session_start();
 
 $errors = [];

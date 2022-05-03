@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
   <div class="container">
     <a class="navbar-brand" href="./">MovieDB</a>
@@ -34,14 +35,33 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="addmovie.php">Lisää Elokuva</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="addrating.php">Anna Arvostelu</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="single.php?id=1">Yksittäinen elokuva (?id=X)</a>
         </li>
+        <?php
+        if (!isset($_SESSION['username'])) {
+          $_SESSION['msg'] = "You have to log in first";
+        }
+        else{
+          echo '<li class="nav-item"><a class="nav-link active" aria-current="page" href="addmovie.php">Lisää Elokuva</a></li>';
+        }
+        
+        if (!isset($_SESSION['username'])) {
+          $_SESSION['msg'] = "You have to log in first";
+
+        }
+        else{
+          echo '<li class="nav-item"><a class="nav-link active" aria-current="page" href="updatefront.php">Muokkaa Elokuvaa</a></li>';
+        }
+        
+                if(isset($_SESSION["username"])){
+                    echo '<a class="nav-link bg-danger" href="logout.php">Log out</a>';
+                }else{
+                    echo '<a class="nav-link bg-success" href="login.php">Log in</a>';
+                }
+            ?>
 
       </ul>
     </div>

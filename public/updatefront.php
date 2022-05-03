@@ -1,7 +1,12 @@
 <?php
+include TEMPLATES_DIR . "head.php";
 require_once MODULES_DIR . "/inc/functions.php";
 require_once MODULES_DIR . "/inc/headers.php";
-include TEMPLATES_DIR . "head.php";
+if (!isset($_SESSION['username'])) {
+  header("Location: ".PUBLIC_DIR."index.php");
+  $_SESSION['msg'] = "You have to log in first";
+  exit;
+}
 $nimi = filter_input(INPUT_POST, "nimi");
 $vuosi = filter_input(INPUT_POST, "vuosi");
 $kesto = filter_input(INPUT_POST, "kesto");
