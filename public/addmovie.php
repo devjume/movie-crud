@@ -48,22 +48,29 @@ if ($request_method === 'POST') {
       }
     }
 
+    foreach ($nayttelijat as $nayttelija) {
+      echo $nayttelija['rooli'] . "<br>";
+      echo $nayttelija['sukupuoli'] . "<br>";
+      echo $nayttelija['etunimi'] . "<br>";
+      echo $nayttelija['sukunimi'] . "<br>";
+    };
+
+
+    // Kutsuu lisaaElokuva funktiota src/modules/addmovie.php tiedostosta
     $viesti = lisaaElokuva($nimi, $vuosi, $kesto, $kieli, $ohjaaja, $ikaraja, $genre, $kuva_url, $nayttelijat);
     #echo '<div class="alert alert-success" role="alert">Elokuva lisätty</div>';
     $valid = true;
   }
- 
+
   $_SESSION['valid'] = $valid;
   $_SESSION['errors'] = $errors;
   $_SESSION['inputs'] = $inputs;
 
   // Ohjaa takaisin samalle sivulle get kutsulla
-  header('Location: addmovie.php', true, 303);
+  //header('Location: addmovie.php', true, 303);
   exit;
-
 } elseif ($request_method === 'GET') {
   if (isset($_SESSION['valid'])) {
-    // get the valid state from the session
     $valid = $_SESSION['valid'];
     unset($_SESSION['valid']);
   }
@@ -82,11 +89,12 @@ if ($request_method === 'POST') {
 ?>
 
 <div class="container pt-2">
-
-  <?php if($valid) {
+  <!-- Näyttää onnistumis viestin -->
+  <?php if ($valid) {
     echo '<div class="alert alert-success" role="alert">Elokuva lisätty</div>';
-  }?>
+  } ?>
 
+  <!-- Perus html -->
   <h3>Lisää elokuva</h3>
 
   <form action="addmovie.php" method="POST" id="elokuva-form" class="row g-3">
@@ -178,13 +186,13 @@ if ($request_method === 'POST') {
       <div class="nayttelija-rivi row mt-2">
         <div class="col-2">
           <div class="form-floating">
-            <input list="nayttelijat" name="nayttelijat[1][etunimi]" id="nayttelija-input-1" class="form-control" placeholder="Etunimi">
+            <input list="etunimet" name="nayttelijat[1][etunimi]" id="etunimi-input-1" class="form-control" placeholder="Etunimi">
             <label for="nayttelija-input-1">Etunimi</label>
           </div>
         </div>
         <div class="col-2">
           <div class="form-floating">
-            <input list="nayttelijat2" name="nayttelijat[1][sukunimi]" id="nayttelija-input-2" class="form-control" placeholder="Sukunimi">
+            <input list="sukunimet" name="nayttelijat[1][sukunimi]" id="sukunimi-input-1" class="form-control" placeholder="Sukunimi">
             <label for="nayttelija-input-2">Sukunimi</label>
           </div>
         </div>
@@ -197,7 +205,7 @@ if ($request_method === 'POST') {
         <div class="col-2">
           <div class="form-floating">
             <select name="nayttelijat[1][sukupuoli]" id="sukupuoli-input-1" class="form-select">
-              <option value="null"></option>
+              <option value=""></option>
               <option value="mies">Mies</option>
               <option value="nainen">Nainen</option>
               <option value="muu">Muu</option>
@@ -206,7 +214,7 @@ if ($request_method === 'POST') {
           </div>
         </div>
         <!-- Datalista näyttelijöistä on erikseen, jotta se ei monistu turhaan kun lisätään useampi näyttelijä -->
-        <datalist id="nayttelijat">
+        <datalist id="etunimet">
           <?php
           require_once MODULES_DIR . "/inc/functions.php";
           try {
@@ -224,7 +232,7 @@ if ($request_method === 'POST') {
           }
           ?>
         </datalist>
-        <datalist id="nayttelijat2">
+        <datalist id="sukunimet">
           <?php
           require_once MODULES_DIR . "/inc/functions.php";
           try {
@@ -272,7 +280,7 @@ if ($request_method === 'POST') {
     parentDiv.insertBefore(clone, btn);
 
     // Lisää yksi numero edellisen näyttelijän id, htmlfor ja name attribuutteihin
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
       clone.children[i].firstElementChild.firstElementChild.value = null;
 
       // Name attribuutti

@@ -53,13 +53,32 @@ function lisaaElokuva($nimi, $vuosi, $kesto, $kieli, $ohjaaja, $ikaraja, $genre,
 }
 
 function luoNayttelija($db, $nayttelija) {
-  $sql= "INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) VALUES (?,?,?)";
-  $pdo = $db->prepare($sql);
-  $pdo->bindParam(1, $nayttelija['etunimi']);
-  $pdo->bindParam(2, $nayttelija['sukunimi']);
-  $pdo->bindParam(3, $nayttelija['sukupuoli']);
-  $pdo->execute();
-  return $db->lastInsertId();
+  // Jos näyttelijän sukupuoli on tyhjä teksti niin muutetaan se NULL arvoksi SQL varten
+  if($nayttelija['sukupuoli'] === '') {
+    $nayttelija['sukupuoli'] = null;
+  }
+
+  $sqlCheckActor = "SELECT id FROM `nayttelija` WHERE `etunimi` = ? AND `sukunimi` = ? AND `sukupuoli` = ?";
+  $pdoActorExits = $db->prepare($sqlCheckActor);
+  $pdoActorExits->bindParam(1, $nayttelija['etunimi']);
+  $pdoActorExits->bindParam(2, $nayttelija['sukunimi']);
+  $pdoActorExits->bindParam(3, $nayttelija['sukupuoli']);
+  $pdoActorExits->execute();
+  $actorId = $pdoActorExits->fetchColumn();
+
+  # Jos näyttelijää ei ole tietokannassa, Sellainen luodaan.
+  if (empty($actorId)) {
+    $sql = "INSERT INTO nayttelija (etunimi, sukunimi, sukupuoli) VALUES (?,?,?)";
+    $pdo = $db->prepare($sql);
+    $pdo->bindParam(1, $nayttelija['etunimi']);
+    $pdo->bindParam(2, $nayttelija['sukunimi']);
+    $pdo->bindParam(3, $nayttelija['sukupuoli']);
+    $pdo->execute();
+    $newActorId = $db->lastInsertId();
+    return $newActorId;
+  }
+
+  return $actorId;
 }
 
 function luoRooli($db, $nayttelijaId, $elokuvaId, $rooli) {
