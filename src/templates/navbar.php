@@ -60,9 +60,9 @@
       </ul>
       <?php
         if (isset($_SESSION["username"])) {
-          echo '<a class="nav-link btn btn-outline-danger ms-auto" href="logout.php">Kirjaudu Ulos</a>';
+          echo '<a class="btn btn-outline-danger ms-auto" href="logout.php">Kirjaudu Ulos</a>';
         } else {
-          echo '<a class="nav-link btn btn-outline-success ms-auto" href="login.php">Kirjaudu Sisään</a>';
+          echo '<a class="btn btn-outline-success ms-auto" href="login.php">Kirjaudu Sisään</a>';
         }
       ?>
     </div>

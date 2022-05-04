@@ -15,7 +15,7 @@ define('ROOT', 'http://localhost/moviedb-backend');
   <link rel="stylesheet" href="<?php echo  PUBLIC_DIR. '/style.css' ?>">
 </head>
 
-<body>
+<body class="pb-5">
 
 <?php 
 include_once "navbar.php"; ?>

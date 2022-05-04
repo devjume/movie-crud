@@ -53,70 +53,66 @@ if (isset($_GET['id']) && isset($_GET['delete'])) {
 
 ?>
 
-<?php 
-function showDeleteButton($id) {
-?>
-<div class="d-flex flex-row mt-2">
-<a class="btn btn-primary me-2" href="updatefront.php" role="button">Muokkaa</a>
- <form method="GET" action="single.php">
-    <input type="hidden" name="id" value="<?php echo $id ?>">
-    <input type="hidden" name="delete" value="true">
-    <button type="submit" class="btn btn-danger">Poista elokuva</button>
-  </form>
-  
-</div>
 <?php
-}
+function showButtons($id)
+{
 ?>
+  <div class="d-flex flex-row mt-2">
+    <a class="btn btn-primary me-2" href="updatefront.php" role="button">Muokkaa</a>
+    <form method="GET" action="single.php">
+      <input type="hidden" name="id" value="<?php echo $id ?>">
+      <input type="hidden" name="delete" value="true">
+      <button type="submit" class="btn btn-danger">Poista elokuva</button>
+    </form>
 
-<?php 
-function showEditButton() {
-?>
-
+  </div>
 <?php
 }
 ?>
 
 
+
+
 <?php
 
-function showMovieDetails($data) {
+function showMovieDetails($data)
+{
 ?>
   <div class="container pt-2">
-  <div class="row">
-    <h1><?php echo $data["nimi"] ?></h1>
-  </div>
-  <div class="row row-cols-2">
-    <div class="col-4">
-      <img src="<?php echo $data['kuva_url'] ?>" style="max-height: 500px; width: auto" class="card-img-top" alt="poster">
+    <div class="row">
+      <h1><?php echo $data["nimi"] ?></h1>
     </div>
-    <div class="col-5">
-      <ul class="list-group">
-        <li class="list-group-item fs-3">Vuosi: <?php echo $data["vuosi"] ?></li>
-        <li class="list-group-item fs-3">Kesto: <?php echo $data["kesto"] ?> min</li>
-        <li class="list-group-item fs-3">Kieli: <?php echo $data["kieli"] ?></li>
-        <li class="list-group-item fs-3">Ikäraja: <?php echo $data["ikaraja"] ?></li>
-        <li class="list-group-item fs-3">Genre: <?php echo $data["genre"] ?></li>
-        <li class="list-group-item fs-3">Ohjaaja: <?php echo $data["ohjaaja"] ?></li>
-      </ul>
-      <?php 
-        if(isset($_SESSION["username"])){
-          showEditButton();
-          showDeleteButton($data["id"]);
+    <div class="row row-cols-2">
+      <div class="col-4">
+        <img src="<?php echo $data['kuva_url'] ?>" style="max-height: 500px; width: auto" class="card-img-top" alt="poster">
+      </div>
+      <div class="col-5">
+        <ul class="list-group">
+          <li class="list-group-item fs-3">Vuosi: <?php echo $data["vuosi"] ?></li>
+          <li class="list-group-item fs-3">Kesto: <?php echo $data["kesto"] ?> min</li>
+          <li class="list-group-item fs-3">Kieli: <?php echo $data["kieli"] ?></li>
+          <li class="list-group-item fs-3">Ikäraja: <?php echo $data["ikaraja"] ?></li>
+          <li class="list-group-item fs-3">Genre: <?php echo $data["genre"] ?></li>
+          <li class="list-group-item fs-3">Ohjaaja: <?php echo $data["ohjaaja"] ?></li>
+        </ul>
+        <?php
+        if (isset($_SESSION["username"])) {
+          showButtons($data["id"]);
         }
-       ?>
-    </div>
-    
-  </div>
+        ?>
+      </div>
 
-</div>
-</div>
+    </div>
+
+  </div>
+  </div>
 <?php
 }
 ?>
 
 <?php
-function showActors($data) {
+function showActors($data)
+{
 ?>
   <div class="container pt-2">
     <div class="row">
@@ -130,11 +126,11 @@ function showActors($data) {
         </thead>
         <tbody>
           <?php foreach ($data as $key => $actor) { ?>
-          <tr>
-            <th scope="row"><?php echo $key + 1?></th>
-            <td><?php echo $actor["nimi"] ?></td>
-            <td><?php echo $actor["rooli"] ?></td>
-          </tr>
+            <tr>
+              <th scope="row"><?php echo $key + 1 ?></th>
+              <td><?php echo $actor["nimi"] ?></td>
+              <td><?php echo $actor["rooli"] ?></td>
+            </tr>
           <?php } ?>
         </tbody>
       </table>
@@ -145,48 +141,93 @@ function showActors($data) {
 ?>
 
 <?php
-  $id = $_GET['id'];
-  try {
-    $pdo = openDB();
-    $movieDetailsSql = "SELECT elokuva.id, elokuva.nimi, elokuva.vuosi, elokuva.kesto, elokuva.kieli, elokuva.ikaraja, elokuva.kuva_url, ohjaaja.nimi as 'ohjaaja', genre.nimi as 'genre' from elokuva
+function showReviews($data)
+{
+?>
+  <div class="container pt-2">
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Arvostelija</th>
+            <th scope="col">Tähdet</th>
+            <th scope="col">Arvostelu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($data as $key => $review) { ?>
+            <tr>
+              <th scope="row"><?php echo $key + 1 ?></th>
+              <td><?php echo $review["arvostelija"] ?></td>
+              <td><?php echo $review["tahdet"] ?></td>
+              <td><?php echo $review["kommentti"] ?></td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<?php
+}
+?>
+
+<?php
+$id = $_GET['id'];
+try {
+  $pdo = openDB();
+  $movieDetailsSql = "SELECT elokuva.id, elokuva.nimi, elokuva.vuosi, elokuva.kesto, elokuva.kieli, elokuva.ikaraja, elokuva.kuva_url, ohjaaja.nimi as 'ohjaaja', genre.nimi as 'genre' from elokuva
     LEFT JOIN ohjaaja ON ohjaaja.id = elokuva.ohjaaja_id
     LEFT JOIN genre ON genre.id = elokuva.genre_id
     where elokuva.id=?;";
-    $pdoStatement = $pdo->prepare($movieDetailsSql);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
-    $rowCount = $pdoStatement->rowCount();
+  $pdoStatement = $pdo->prepare($movieDetailsSql);
+  $pdoStatement->bindParam(1,  $id);
+  $pdoStatement->execute();
+  $rowCount = $pdoStatement->rowCount();
 
-    # Jos elokuvaa ei löydy näytetään käyttäjälle viesti
-    if ($rowCount <= 0) {
-      echo "<h3 style='color:red'> Elokuvaa ei löytynyt syöttämäsi ID:n perusteella <h3>";
-      exit;
-    }
+  # Jos elokuvaa ei löydy näytetään käyttäjälle viesti
+  if ($rowCount <= 0) {
+    echo "<h3 style='color:red'> Elokuvaa ei löytynyt syöttämäsi ID:n perusteella <h3>";
+    exit;
+  }
 
-    $movieDetails = $pdoStatement->fetch();
-    showMovieDetails($movieDetails);
-    
+  $movieDetails = $pdoStatement->fetch();
+  showMovieDetails($movieDetails);
 
-    $actorsSql = "SELECT concat(nayttelija.etunimi , ' ', nayttelija.sukunimi) as nimi, nayttelija_rooli.rooli from elokuva
+
+  $actorsSql = "SELECT concat(nayttelija.etunimi , ' ', nayttelija.sukunimi) as nimi, nayttelija_rooli.rooli from elokuva
     LEFT JOIN nayttelija_rooli ON nayttelija_rooli.elokuva_id= elokuva.id
     LEFT JOIN nayttelija ON nayttelija.id = nayttelija_rooli.nayttelija_id
     where elokuva.id=?;";
 
-    $pdoStatement = $pdo->prepare($actorsSql);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
+  $pdoStatement = $pdo->prepare($actorsSql);
+  $pdoStatement->bindParam(1, $id);
+  $pdoStatement->execute();
+  $actors = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
-    $actors = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
-    if(!empty( $actors[0]["nimi"])) {
-      showActors($actors);
-    }
-
-  } catch (PDOException $e) {
-    returnError($e);
+  // Jos vähintään yksi näyttelijä-rooli löytyy näytetään roolit taulukko
+  if (!empty($actors[0]["nimi"])) {
+    showActors($actors);
   }
-  ?>
 
- 
+  $reviewSql = "SELECT arvostelija, tahdet, kommentti FROM `arvostelu` WHERE elokuva_id = ?";
+  $pdoStatement = $pdo->prepare($reviewSql);
+  $pdoStatement->bindParam(1, $id);
+  $pdoStatement->execute();
+
+  $reviews = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+  // Jos vähintään yksi arvostelu löytyy näytetään arvostelu taulukko
+  if(!empty($reviews[0]['tahdet'])) {
+    showReviews($reviews);
+  }
+  
+
+} catch (PDOException $e) {
+  returnError($e);
+}
+?>
+
+
 
 <?php
 include TEMPLATES_DIR . "foot.php";
