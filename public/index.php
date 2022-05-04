@@ -7,12 +7,12 @@ include TEMPLATES_DIR . "movieCard.php";
 
 <div class="container">
   <h1>Elokuva tietokanta </h1>
-  <div class="row row-cols-3 row-cols-md-3 g-1">
+  <div class="row row-cols-3 row-cols-md-3 d-flex justify-content-between">
     <?php
     try {
       $sql = "SELECT elokuva.id as id, elokuva.nimi as elokuva, vuosi, kesto, kieli, ikaraja, kuva_url, ohjaaja.nimi as ohjaaja FROM elokuva
       left join ohjaaja on elokuva.ohjaaja_id = ohjaaja.id
-      where kuva_url IS not NULL ORDER BY RAND () limit 5";
+      where kuva_url IS not NULL ORDER BY RAND () limit 12";
       $pdo = openDB();
       $elokuvat = $pdo->query($sql);
 

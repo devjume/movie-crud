@@ -37,6 +37,8 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="addrating.php">Anna Arvostelu</a>
         </li>
+
+        
         <?php
         if (!isset($_SESSION['username'])) {
           $_SESSION['msg'] = "You have to log in first";
@@ -53,14 +55,16 @@
           echo '<li class="nav-item"><a class="nav-link active" aria-current="page" href="updatefront.php">Muokkaa Elokuvaa</a></li>';
         }
         
-                if(isset($_SESSION["username"])){
-                    echo '<a class="nav-link btn btn-danger" href="logout.php">Kirjaudu Ulos</a>';
-                }else{
-                    echo '<a class="nav-link btn btn-success" href="login.php">Kirjaudu Sisään</a>';
-                }
-            ?>
+        ?>
 
       </ul>
+      <?php
+        if (isset($_SESSION["username"])) {
+          echo '<a class="nav-link btn btn-outline-danger ms-auto" href="logout.php">Kirjaudu Ulos</a>';
+        } else {
+          echo '<a class="nav-link btn btn-outline-success ms-auto" href="login.php">Kirjaudu Sisään</a>';
+        }
+      ?>
     </div>
   </div>
 </nav>
