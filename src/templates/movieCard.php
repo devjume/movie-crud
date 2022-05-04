@@ -3,7 +3,7 @@
 function createSingleCard($data) {
 ?>
 <div class="col-3 mt-2">
-      <div class="card" style="">
+      <div class="card">
         <img src=<?php echo $data['kuva_url'] ?> class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title"><?php echo $data["elokuva"] ?></h5>

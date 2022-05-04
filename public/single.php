@@ -58,7 +58,7 @@ function showButtons($id)
 {
 ?>
   <div class="d-flex flex-row mt-2">
-    <a class="btn btn-primary me-2" href="updatefront.php" role="button">Muokkaa</a>
+    <a class="btn btn-primary me-2" href="updateMovie.php" role="button">Muokkaa</a>
     <form method="GET" action="single.php">
       <input type="hidden" name="id" value="<?php echo $id ?>">
       <input type="hidden" name="delete" value="true">

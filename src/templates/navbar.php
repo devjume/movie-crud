@@ -52,7 +52,7 @@
 
         }
         else{
-          echo '<li class="nav-item"><a class="nav-link active" aria-current="page" href="updatefront.php">Muokkaa Elokuvaa</a></li>';
+          echo '<li class="nav-item"><a class="nav-link active" aria-current="page" href="updateMovie.php">Muokkaa Elokuvaa</a></li>';
         }
         
         ?>
