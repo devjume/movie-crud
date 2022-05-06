@@ -5,6 +5,7 @@ if (!isset($_SESSION['username'])) {
   $_SESSION['msg'] = "You have to log in first";
   exit;
 }
+
 session_start();
 
 $errors = [];
@@ -91,7 +92,15 @@ if ($request_method === 'POST') {
 <div class="container pt-2">
   <!-- Näyttää onnistumis viestin -->
   <?php if ($valid) {
-    echo '<div class="alert alert-success" role="alert">Elokuva lisätty</div>';
+  ?>
+    <script type="text/javascript">
+      setTimeout(function() {
+        var element = document.getElementById("alert1");
+        element.classList.add("d-none");
+      },3000);
+    </script>
+  <?php
+   echo '<div id="alert1" class="alert alert-success" role="alert">Elokuva lisätty</div>';
   } ?>
 
   <!-- Perus html -->
