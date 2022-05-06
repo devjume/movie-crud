@@ -20,15 +20,19 @@ $genre_vanha = filter_input(INPUT_POST, "genre_vanha");
 
 //jos elokuvaa on päivitetty
 if ( isset($_GET['updated']) && $_GET['updated'] == 1 )
-{
-  //näytetään siitä ilmoitus
-    echo '<div class="alert alert-success" role="alert">Elokuvaa muokattu!</div>';
-}
-?>
+{ ?>
+  <script type="text/javascript">
+      setTimeout(function() {
+        var element = document.getElementById("alert1");
+        element.classList.add("d-none");
+      },3000);
+    </script>
+    <?php
+     echo '<div id="alert1" class="alert alert-success" role="alert">Elokuva lisätty</div>';
+    } ?> 
 
 <div class="container-fluid px-5 py-2">
   <div class="row">
-
     <table class="table-responsive">
       <thead>
         <tr class="d-flex">
