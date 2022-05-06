@@ -67,7 +67,7 @@ if ($request_method === 'POST') {
   $_SESSION['inputs'] = $inputs;
 
   // Ohjaa takaisin samalle sivulle get kutsulla
-  //header('Location: addmovie.php', true, 303);
+  header('Location: addmovie.php', true, 303);
   exit;
 } elseif ($request_method === 'GET') {
   if (isset($_SESSION['valid'])) {
