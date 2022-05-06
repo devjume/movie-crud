@@ -6,7 +6,7 @@
         logout();
         header("Location: index.php");
     }else{
-        echo '<div class="alert alert-success" role="alert">Logged out!!</div>';
+        echo '<div class="alert alert-success" role="alert">Olet kirjautunut ulos!</div>';
     }
 
     include TEMPLATES_DIR.'foot.php.';
