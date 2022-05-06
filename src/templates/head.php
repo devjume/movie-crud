@@ -12,7 +12,7 @@ define('ROOT', 'http://localhost/moviedb-backend');
   <title>Elokuva Tietokanta</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="<?php echo  PUBLIC_DIR. '/style.css' ?>">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="pb-5">
