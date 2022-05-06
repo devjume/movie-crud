@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS moviedb;
+--DROP DATABASE IF EXISTS moviedb;
 
-CREATE DATABASE moviedb;
+--CREATE DATABASE moviedb;
 
-USE moviedb;
+--USE opisk_n1pesa00;
 
 CREATE TABLE ohjaaja (
   id int AUTO_INCREMENT,
