@@ -18,8 +18,10 @@ $kuva_url = filter_input(INPUT_POST, "kuva_url");
 $ohjaaja_vanha = filter_input(INPUT_POST, "ohjaaja_vanha");
 $genre_vanha = filter_input(INPUT_POST, "genre_vanha");
 
+//jos elokuvaa on päivitetty
 if ( isset($_GET['updated']) && $_GET['updated'] == 1 )
 {
+  //näytetään siitä ilmoitus
     echo '<div class="alert alert-success" role="alert">Elokuvaa muokattu!</div>';
 }
 ?>
@@ -73,6 +75,7 @@ if ( isset($_GET['updated']) && $_GET['updated'] == 1 )
         if (isset($id)) {
           try {
             updateMovie($id, $nimi, $vuosi, $kesto, $kieli, $ikaraja, $ohjaaja_id, $genre_id, $kuva_url, $ohjaaja_vanha, $genre_vanha);
+            //ohjataan takaisin samalle sivulle, mutta annetaan sivun tietää, että elokuvan tietoja on päivitetty
             header( "Location: updateMovie.php?updated=1");
           } catch (Exception $e) {
             echo '<div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div>';
