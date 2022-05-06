@@ -28,7 +28,7 @@ if ( isset($_GET['updated']) && $_GET['updated'] == 1 )
       },3000);
     </script>
     <?php
-     echo '<div id="alert1" class="alert alert-success" role="alert">Elokuva lisätty</div>';
+     echo '<div id="alert1" class="alert alert-success" role="alert">Elokuvan tietojen muokkaus onnistui</div>';
     } ?> 
 
 <div class="container-fluid px-5 py-2">
