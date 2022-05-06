@@ -1,4 +1,5 @@
 ./myconf.ini
+./conf.ini
 # Logs
 logs
 *.log

@@ -21,6 +21,7 @@ $genre_vanha = filter_input(INPUT_POST, "genre_vanha");
 //jos elokuvaa on päivitetty
 if ( isset($_GET['updated']) && $_GET['updated'] == 1 )
 { ?>
+<!--niin näytetään siitä ilmoitus kolmen sekunnin ajan-->
   <script type="text/javascript">
       setTimeout(function() {
         var element = document.getElementById("alert1");
