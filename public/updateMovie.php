@@ -17,6 +17,11 @@ $genre_id = filter_input(INPUT_POST, "genre_id");
 $kuva_url = filter_input(INPUT_POST, "kuva_url");
 $ohjaaja_vanha = filter_input(INPUT_POST, "ohjaaja_vanha");
 $genre_vanha = filter_input(INPUT_POST, "genre_vanha");
+
+if ( isset($_GET['updated']) && $_GET['updated'] == 1 )
+{
+    echo '<div class="alert alert-success" role="alert">Elokuvaa muokattu!</div>';
+}
 ?>
 
 <div class="container-fluid px-5 py-2">
@@ -42,8 +47,14 @@ $genre_vanha = filter_input(INPUT_POST, "genre_vanha");
         require_once MODULES_DIR . "/inc/functions.php";
         require_once MODULES_DIR . "/inc/headers.php";
         require_once MODULES_DIR . "updatemovie.php";
+        
+        $request_method = strtoupper($_SERVER['REQUEST_METHOD']);
 
-        $id = $_GET['id'];
+        if ($request_method === 'POST') {
+          $id = $_GET['id'];
+        }
+
+
 
         try {
           $pdo = openDB();
@@ -62,7 +73,7 @@ $genre_vanha = filter_input(INPUT_POST, "genre_vanha");
         if (isset($id)) {
           try {
             updateMovie($id, $nimi, $vuosi, $kesto, $kieli, $ikaraja, $ohjaaja_id, $genre_id, $kuva_url, $ohjaaja_vanha, $genre_vanha);
-            echo '<div class="alert alert-success" role="alert">Elokuvaa muokattu!</div>';
+            header( "Location: updateMovie.php?updated=1");
           } catch (Exception $e) {
             echo '<div class="alert alert-danger" role="alert">' . $e->getMessage() . '</div>';
           }
