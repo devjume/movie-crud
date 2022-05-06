@@ -1,23 +1,25 @@
-# movie-db-crud
+## Tietokannansuunnittelu ja tietokantaohjelmointi kurssi - Ryhmä 2.
 
-CREATE/INSERT: Arvostelujen postaus, elokuvien lisääminen kantaan.  
-READ: Lukee kaikki elokuvat kannasta, printataan vaikka html taulukoksi, luettavuuden helpottamiseksi.  
-UPDATE: Read tekee html-taulukon elokuvista, sivulle ilmestyy "muokkaa" nappi jolla voi muokata elokuvien sarakkeiden tietoja.  
-DELETE: Mahdollisuus poistaa arvostelu?  
+## CRUD ominaisuudet  
+CREATE/INSERT: Elokuvan ja arvostelun lisääminen  
+READ: Lukee kaikki elokuvat kannasta ja näyttää ne etusivulla sekä yksittäisillä sivuilla  
+UPDATE: Elokuvan tietoja voi muokata  
+DELETE: Voi poistaa elokuvan
 
 
 ## TODO:
 - [x] Etusivu, jossa näkyisi muutamia elokuva julisteineen.
-- [ ] Sivu, jolla on html taulu kaikista elokuvista.
+- [x] Sivu, jolla on html taulu kaikista elokuvista.
+- [x] Transactionin käyttö -> **käytetään deletemovie.php tiedostossa**
 - [x] Elokuvan poisto
-- [ ] Elokuvan tietojen muokkaus
--  [ ] Nappi, jolla pääsee muokkaustilaan ja jokaista elokuvaan liittyvää tieto voisi muokata (Myös näyttelijät, ohjaajat, genre jne.)
+- [x] Elokuvan tietojen muokkaus
+  - [ ] Nappi, jolla pääsee muokkaustilaan ja jokaista elokuvaan liittyvää tieto voisi muokata (Myös näyttelijät, ohjaajat, genre jne.)
 - [x] Jokaisella elokuva sivulla voi lisätä arvostelun.
-  - [ ] arvostelut näkyy jokaisen elokuvan omalla sivulla
-- [ ] Sivu jolla voi lisätä uuden elokuvan kaikkineen tietoineen.
+  - [x] arvostelut näkyy jokaisen elokuvan omalla sivulla
+- [x] Sivu jolla voi lisätä uuden elokuvan kaikkineen tietoineen.
   - [x] Myös näyttelijät, ohjaaja yms. (ei arvostelua)
-- [ ] Projektin rakenne muuttaa Meijan tunnilla käydyllä tavalla
+- [x] Projektin rakenne muuttaa Meijan tunnilla käydyllä tavalla
 - [ ] Muuta git repon nimeä
-- [ ] Navigointi palkki 
-- [ ] Ulkonäkö bootstraping avulla
+- [x] Navigointi palkki 
+- [x] Ulkonäkö bootstraping avulla
 - [ ] Useampi genre elokuvalle
