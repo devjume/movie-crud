@@ -6,8 +6,6 @@ if (!isset($_SESSION['username'])) {
   exit;
 }
 
-session_start();
-
 $errors = [];
 $inputs = [];
 $valid = false;
@@ -108,7 +106,7 @@ if ($request_method === 'POST') {
 
   <form action="addmovie.php" method="POST" id="elokuva-form" class="row g-3">
     <div class="col-2">
-      <label for="nimi-input" class="form-label">Elokuva:</label>
+      <label for="nimi-input" class="form-label">Elokuva*:</label>
       <input type="text" name="nimi" id="nimi-input" class="form-control" placeholder="Elokuvan nimi" required>
     </div>
     <div class="col-1">
@@ -141,8 +139,8 @@ if ($request_method === 'POST') {
       </select>
     </div>
     <div class="col-2">
-      <label for="ohjaaja-input" class="form-label">Ohjaaja:</label>
-      <input list="ohjaajat" name="ohjaaja" id="ohjaaja-input" class="form-control" placeholder="Ohjaaja">
+      <label for="ohjaaja-input" class="form-label">Ohjaaja*:</label>
+      <input list="ohjaajat" name="ohjaaja" id="ohjaaja-input" required class="form-control" placeholder="Ohjaaja">
       <datalist id="ohjaajat">
         <?php
         require_once MODULES_DIR . "/inc/functions.php";
@@ -163,7 +161,7 @@ if ($request_method === 'POST') {
       </datalist>
     </div>
     <div class="col-2">
-      <label for="genre-input" class="form-label">Genre:</label>
+      <label for="genre-input" class="form-label">Genre*:</label>
       <input list="genret" name="genre" id="genre-input" class="form-control" placeholder="Genre" required>
       <datalist id="genret">
         <?php

@@ -1,8 +1,6 @@
 <?php
 include TEMPLATES_DIR . "head.php";
 
-session_start();
-
 $errors = [];
 $inputs = [];
 $valid = false;
