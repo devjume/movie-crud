@@ -11,9 +11,6 @@ function lisaaElokuva($nimi, $vuosi, $kesto, $kieli, $ohjaaja, $ikaraja, $genre,
       echo "Database connection Failed!";
     }
 
-    # TARKASTA LÖYTYYKÖ ELOKUVA JO TIETOKANNASTA
-    # Tällä hetkellä UI kautta ei voi lisätä useampaa näyttelijää -> ei loppaa jotenki niitä läpi
-
     $sqlMovie = "INSERT INTO elokuva (nimi, vuosi, kesto, kieli, ohjaaja_id, ikaraja, genre_id, kuva_url) VALUES (?,?,?,?,?,?,?,?)";
 
     $pdoStatement = $db->prepare($sqlMovie);

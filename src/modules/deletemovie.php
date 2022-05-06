@@ -5,24 +5,35 @@ require_once MODULES_DIR . "/inc/headers.php";
 $id = $_GET['id'];
 
 try {
-    $pdo = openDB();
-    $sql = "delete from nayttelija_rooli where elokuva_id=?";
-    $pdoStatement = $pdo->prepare($sql);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
+    $db = openDB();
 
-    $sql2 = "delete from arvostelu where elokuva_id=?";
-    $pdoStatement = $pdo->prepare($sql2);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
+    if (!$db) {
+        echo "Database connection Failed!";
+    }
 
-    $sql3 = "delete from elokuva where id=?";
-    $pdoStatement = $pdo->prepare($sql3);
-    $pdoStatement->bindParam(1,  $id);
-    $pdoStatement->execute();
+    $db->beginTransaction();
+
+    $sqlDeleteRole = "delete from nayttelija_rooli where elokuva_id=?";
+    $pdo = $db->prepare($sqlDeleteMovie);
+    $pdo->bindParam(1,  $id);
+    $pdo->execute();
+
+
+    $sqlDeleteReview = "delete from arvostelu where elokuva_id=?";
+    $pdo = $db->prepare($sqlDeleteReview);
+    $pdo->bindParam(1,  $id);
+    $pdo->execute();
+
+    $sqlDeleteMovie = "delete from elokuva where id=?";
+    $pdo = $db->prepare($sqlDeleteMovie);
+    $pdo->bindParam(1,  $id);
+    $pdo->execute();
+
+    $db->commit();
 
     header("Location: movies.php");
 } catch (PDOException $e) {
+    $db->rollBack();
     returnError($e);
   }
     
